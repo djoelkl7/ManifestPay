@@ -1,6 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import AnimatedSection from '../../components/AnimatedSection';
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Search, Download, Plus, Check, MoreVertical } from 'lucide-react';
 
 interface User {
     id: string;
@@ -13,11 +14,22 @@ interface User {
     balance: number;
 }
 
+type SortField = 'name' | 'email' | 'status' | 'type';
+type SortOrder = 'asc' | 'desc';
+
 const UserManagementPage: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingUser, setEditingUser] = useState<User | null>(null);
     const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+    
+    // Pagination State
+    const [currentPage, setCurrentPage] = useState(1);
+    const usersPerPage = 5;
+
+    // Sorting State
+    const [sortField, setSortField] = useState<SortField>('name');
+    const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
     
     // Mock Users
     const [users, setUsers] = useState<User[]>([
@@ -26,7 +38,52 @@ const UserManagementPage: React.FC = () => {
         { id: 'U1003', name: 'Michael Brown', email: 'mike.b@test.com', username: 'mikeb', balance: 0.00, status: 'Frozen', type: 'Standard' },
         { id: 'U1004', name: 'Emily Davis', email: 'emily.d@test.com', username: 'emilyd', balance: 145000.50, status: 'Active', type: 'Platinum' },
         { id: 'U1005', name: 'Robert Wilson', email: 'r.wilson@test.com', username: 'rwilson', balance: 500.00, status: 'Offline', type: 'Standard' },
+        { id: 'U1006', name: 'James Thompson', email: 'j.thompson@example.com', username: 'jamest', balance: 8900.00, status: 'Active', type: 'Premium' },
+        { id: 'U1007', name: 'Patricia Garcia', email: 'p.garcia@test.com', username: 'garciap', balance: 12000.00, status: 'Active', type: 'Standard' },
+        { id: 'U1008', name: 'David Miller', email: 'd.miller@example.com', username: 'millerd', balance: 450.00, status: 'Frozen', type: 'Standard' },
+        { id: 'U1009', name: 'Linda Martinez', email: 'linda.m@test.com', username: 'martinezl', balance: 250000.00, status: 'Active', type: 'Platinum' },
+        { id: 'U1010', name: 'William Taylor', email: 'w.taylor@example.com', username: 'taylorw', balance: 15.00, status: 'Offline', type: 'Standard' },
     ]);
+
+    const handleSort = (field: SortField) => {
+        if (sortField === field) {
+            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        } else {
+            setSortField(field);
+            setSortOrder('asc');
+        }
+    };
+
+    const sortedUsers = useMemo(() => {
+        const result = [...users].sort((a, b) => {
+            const fieldA = a[sortField].toLowerCase();
+            const fieldB = b[sortField].toLowerCase();
+            if (fieldA < fieldB) return sortOrder === 'asc' ? -1 : 1;
+            if (fieldA > fieldB) return sortOrder === 'asc' ? 1 : -1;
+            return 0;
+        });
+        return result;
+    }, [users, sortField, sortOrder]);
+
+    const filteredUsers = useMemo(() => {
+        return sortedUsers.filter(u => 
+            u.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            u.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            u.username.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [sortedUsers, searchTerm]);
+
+    // Pagination Logic
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+    const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+
+    const handlePageChange = (page: number) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
 
     const [formData, setFormData] = useState({
         name: '',
@@ -37,15 +94,11 @@ const UserManagementPage: React.FC = () => {
         type: 'Standard' as User['type'],
     });
 
-    const filteredUsers = users.filter(u => 
-        u.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        u.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        u.username.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredUsersCount = filteredUsers.length;
 
     const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked) {
-            setSelectedUserIds(filteredUsers.map(u => u.id));
+            setSelectedUserIds(currentUsers.map(u => u.id));
         } else {
             setSelectedUserIds([]);
         }
@@ -190,7 +243,7 @@ const UserManagementPage: React.FC = () => {
                         </button>
                         <button 
                             onClick={() => handleOpenModal()}
-                            className="bg-primary-red text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition-colors whitespace-nowrap"
+                            className="bg-electric-blue text-white px-4 py-2 rounded-lg font-bold hover:bg-electric-blue/80 transition-colors whitespace-nowrap"
                         >
                             Add User
                         </button>
@@ -204,25 +257,55 @@ const UserManagementPage: React.FC = () => {
                                 <th className="p-4 w-10">
                                     <input 
                                         type="checkbox" 
-                                        className="rounded border-gray-300 text-primary-red focus:ring-primary-red"
-                                        checked={selectedUserIds.length === filteredUsers.length && filteredUsers.length > 0}
+                                        className="rounded border-gray-300 text-electric-blue focus:ring-electric-blue"
+                                        checked={selectedUserIds.length === currentUsers.length && currentUsers.length > 0}
                                         onChange={handleSelectAll}
                                     />
                                 </th>
-                                <th className="p-4 font-semibold">User Details</th>
+                                <th 
+                                    className="p-4 font-semibold cursor-pointer group"
+                                    onClick={() => handleSort('name')}
+                                >
+                                    <div className="flex items-center">
+                                        User Details
+                                        {sortField === 'name' ? (
+                                            sortOrder === 'asc' ? <ChevronUp size={14} className="ml-1 text-electric-blue" /> : <ChevronDown size={14} className="ml-1 text-electric-blue" />
+                                        ) : <MoreVertical size={14} className="ml-1 opacity-0 group-hover:opacity-100" />}
+                                    </div>
+                                </th>
                                 <th className="p-4 font-semibold">Username</th>
-                                <th className="p-4 font-semibold">Account Type</th>
-                                <th className="p-4 font-semibold">Availability</th>
+                                <th 
+                                    className="p-4 font-semibold cursor-pointer group"
+                                    onClick={() => handleSort('type')}
+                                >
+                                    <div className="flex items-center">
+                                        Account Type
+                                        {sortField === 'type' ? (
+                                            sortOrder === 'asc' ? <ChevronUp size={14} className="ml-1 text-electric-blue" /> : <ChevronDown size={14} className="ml-1 text-electric-blue" />
+                                        ) : <MoreVertical size={14} className="ml-1 opacity-0 group-hover:opacity-100" />}
+                                    </div>
+                                </th>
+                                <th 
+                                    className="p-4 font-semibold cursor-pointer group"
+                                    onClick={() => handleSort('status')}
+                                >
+                                    <div className="flex items-center">
+                                        Availability
+                                        {sortField === 'status' ? (
+                                            sortOrder === 'asc' ? <ChevronUp size={14} className="ml-1 text-electric-blue" /> : <ChevronDown size={14} className="ml-1 text-electric-blue" />
+                                        ) : <MoreVertical size={14} className="ml-1 opacity-0 group-hover:opacity-100" />}
+                                    </div>
+                                </th>
                                 <th className="p-4 font-semibold text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {filteredUsers.map(user => (
-                                <tr key={user.id} className={`hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors ${selectedUserIds.includes(user.id) ? 'bg-red-50/50 dark:bg-red-900/10' : ''}`}>
+                            {currentUsers.map(user => (
+                                <tr key={user.id} className={`hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors ${selectedUserIds.includes(user.id) ? 'bg-electric-blue/5 dark:bg-electric-blue/10' : ''}`}>
                                     <td className="p-4">
                                         <input 
                                             type="checkbox" 
-                                            className="rounded border-gray-300 text-primary-red focus:ring-primary-red"
+                                            className="rounded border-gray-300 text-electric-blue focus:ring-electric-blue"
                                             checked={selectedUserIds.includes(user.id)}
                                             onChange={() => handleSelectUser(user.id)}
                                         />
@@ -273,6 +356,42 @@ const UserManagementPage: React.FC = () => {
                             ))}
                         </tbody>
                     </table>
+                </div>
+
+                {/* Pagination */}
+                <div className="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-gray-100 dark:border-gray-700">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Showing <span className="font-semibold text-gray-900 dark:text-white">{indexOfFirstUser + 1}</span> to <span className="font-semibold text-gray-900 dark:text-white">{Math.min(indexOfLastUser, filteredUsersCount)}</span> of <span className="font-semibold text-gray-900 dark:text-white">{filteredUsersCount}</span> users
+                    </p>
+                    <div className="flex items-center space-x-2">
+                        <button 
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg disabled:opacity-50 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                        >
+                            <ChevronLeft size={18} />
+                        </button>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                            <button
+                                key={page}
+                                onClick={() => handlePageChange(page)}
+                                className={`w-10 h-10 rounded-lg font-bold text-sm transition-all ${
+                                    currentPage === page 
+                                        ? 'bg-electric-blue text-white shadow-lg shadow-electric-blue/20' 
+                                        : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 border border-transparent'
+                                }`}
+                            >
+                                {page}
+                            </button>
+                        ))}
+                        <button 
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg disabled:opacity-50 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                        >
+                            <ChevronRight size={18} />
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -368,7 +487,7 @@ const UserManagementPage: React.FC = () => {
                                 </button>
                                 <button 
                                     type="submit"
-                                    className="flex-1 px-4 py-2.5 bg-primary-red text-white rounded-lg font-bold hover:bg-red-700 transition-colors"
+                                    className="flex-1 px-4 py-2.5 bg-electric-blue text-white rounded-lg font-bold hover:bg-electric-blue/80 transition-colors"
                                 >
                                     {editingUser ? 'Update User' : 'Create User'}
                                 </button>

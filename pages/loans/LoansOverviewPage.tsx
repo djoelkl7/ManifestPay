@@ -15,16 +15,16 @@ const LoanCard: React.FC<{
 }> = ({ type, balance, total, nextPayment, date, progress, id, status }) => {
     const statusColors = {
         'Approved': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
-        'Active': 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-        'Rejected': 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
-        'Under Review': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+        'Active': 'bg-electric-blue/10 text-electric-blue border border-electric-blue/20',
+        'Rejected': 'bg-red-500/10 text-red-500 border border-red-500/20',
+        'Under Review': 'bg-soft-cyan/10 text-soft-cyan border border-soft-cyan/20',
     };
 
     const borderColors = {
         'Approved': 'border-green-500',
-        'Active': 'border-blue-500',
+        'Active': 'border-electric-blue',
         'Rejected': 'border-red-500',
-        'Under Review': 'border-yellow-500',
+        'Under Review': 'border-soft-cyan',
     };
 
     return (
@@ -52,7 +52,7 @@ const LoanCard: React.FC<{
                 {progress !== undefined && (
                     <>
                         <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                            <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
+                            <div className="bg-electric-blue h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
                         </div>
                         <p className="text-xs text-right mt-1 text-light-text-secondary dark:text-gray-500">of {total} Principal</p>
                     </>
@@ -60,10 +60,10 @@ const LoanCard: React.FC<{
             </div>
 
             {nextPayment && date && (
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-md flex justify-between items-center">
+                <div className="bg-electric-blue/5 dark:bg-electric-blue/10 p-3 rounded-md flex justify-between items-center border border-electric-blue/10">
                     <div>
-                        <p className="text-xs text-blue-800 dark:text-blue-300 font-semibold">Next Payment</p>
-                        <p className="text-sm font-bold text-light-text dark:text-white">{nextPayment}</p>
+                        <p className="text-xs text-electric-blue font-semibold">Next Payment</p>
+                        <p className="text-sm font-bold text-light-text dark:text-white uppercase tracking-tighter">{nextPayment}</p>
                     </div>
                     <div className="text-right">
                         <p className="text-xs text-light-text-secondary dark:text-gray-400">Due Date</p>
@@ -100,7 +100,7 @@ const LoansOverviewPage: React.FC = () => {
                         <h1 className="text-2xl font-bold text-light-text dark:text-white">Loans & Lending</h1>
                         <p className="text-light-text-secondary dark:text-gray-400">Manage your existing loans or apply for new financing.</p>
                     </div>
-                    <Link to="/dashboard/loans/apply" className="bg-primary-red text-white font-semibold py-3 px-6 rounded-lg hover:bg-red-700 transition-colors shadow-lg transform hover:scale-105">
+                    <Link to="/dashboard/loans/apply" className="bg-electric-blue text-white font-bold py-3 px-8 rounded-xl hover:bg-electric-blue/80 transition-all shadow-lg shadow-electric-blue/20 transform hover:scale-[1.02] active:scale-[0.98]">
                         Apply for New Loan
                     </Link>
                 </div>

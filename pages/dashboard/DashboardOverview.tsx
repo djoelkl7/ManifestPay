@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedSection from '../../components/AnimatedSection';
+import FeedbackForm from '../../components/FeedbackForm';
 import { useUser } from '../../contexts/UserContext';
 import { 
   ShieldAlert, 
@@ -13,16 +14,20 @@ import {
   MessageSquare,
   CreditCard,
   Send,
-  Plus
+  Plus,
+  X,
+  Bell,
+  FileText
 } from 'lucide-react';
 
 const DashboardOverview: React.FC = () => {
   const { user } = useUser();
+  const [showFeedback, setShowFeedback] = useState(false);
 
   const accounts = [
-    { type: 'Checking Account', number: '**** 8821', balance: 1200000.00, change: '+12.4%', color: 'from-primary-red/20 to-primary-red/5' },
-    { type: 'Savings Account', number: '**** 4432', balance: 3000000.00, change: '+4.2%', color: 'from-white/10 to-white/5' },
-    { type: 'Total Net Worth', number: 'Combined Balance', balance: 4200000.00, change: 'Stable', color: 'from-blue-500/20 to-blue-500/5' },
+    { type: 'Checking Account', number: '**** 8821', balance: 1200000.00, change: '+12.4%', color: 'from-electric-blue/20 to-electric-blue/5' },
+    { type: 'Savings Account', number: '**** 4432', balance: 3000000.00, change: '+4.2%', color: 'from-neon-purple/20 to-neon-purple/5' },
+    { type: 'Total Net Worth', number: 'Combined Balance', balance: 4200000.00, change: 'Stable', color: 'from-soft-cyan/20 to-soft-cyan/5' },
   ];
 
   const recentActivity = [
@@ -36,13 +41,13 @@ const DashboardOverview: React.FC = () => {
     <div className="space-y-8 pb-10">
       {/* Account Locked Alert - Premium Version */}
       <AnimatedSection>
-        <div className="glass-morphism p-5 rounded-2xl flex items-start space-x-5 border-primary-red/20 overflow-hidden relative group">
-          <div className="absolute inset-0 bg-primary-red/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div className="bg-primary-red/20 p-3 rounded-xl border border-primary-red/30">
-            <ShieldAlert className="w-6 h-6 text-primary-red" />
+        <div className="glass-morphism p-5 rounded-2xl flex items-start space-x-5 border-electric-blue/20 overflow-hidden relative group">
+          <div className="absolute inset-0 bg-electric-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="bg-electric-blue/20 p-3 rounded-xl border border-electric-blue/30">
+            <ShieldAlert className="w-6 h-6 text-electric-blue" />
           </div>
           <div className="flex-grow">
-            <h3 className="font-display font-bold text-primary-red text-lg">Verification Required</h3>
+            <h3 className="font-display font-bold text-electric-blue text-lg">Verification Required</h3>
             <p className="text-white/60 text-sm leading-relaxed max-w-2xl">
               To ensure the highest level of security for your high-net-worth portfolio, we've temporarily paused withdrawals. 
               Please connect with your <span className="text-white font-medium">designated account strategist</span> to complete the Tier 3 verification.
@@ -172,21 +177,57 @@ const DashboardOverview: React.FC = () => {
                   { name: 'Transfer', icon: <Send size={24} />, path: '/transfers/send' },
                   { name: 'Assets', icon: <ArrowUpRight size={24} />, path: '/dashboard/accounts' },
                   { name: 'Statements', icon: <FileText size={24} />, path: '/dashboard/statements' },
-                  { name: 'Support', icon: <MessageSquare size={24} />, path: '/contact' },
+                  { name: 'Feedback', icon: <MessageSquare size={24} />, onClick: () => setShowFeedback(true) },
                 ].map((action) => (
                   <button 
                     key={action.name}
-                    className="flex flex-col items-center justify-center p-6 bg-white/5 rounded-2xl border border-white/5 hover:bg-primary-red hover:border-primary-red transition-all duration-500 group"
+                    onClick={action.onClick}
+                    className="flex flex-col items-center justify-center p-6 bg-white/5 rounded-2xl border border-white/5 hover:bg-electric-blue hover:border-electric-blue transition-all duration-500 group"
                   >
-                    <div className="mb-3 text-white/60 group-hover:text-white group-hover:scale-110 transition-all duration-500">
-                      {action.icon}
-                    </div>
-                    <span className="font-display font-bold text-xs uppercase tracking-widest text-white/40 group-hover:text-white">
-                      {action.name}
-                    </span>
+                    {action.path ? (
+                      <Link to={action.path} className="flex flex-col items-center">
+                        <div className="mb-3 text-white/60 group-hover:text-white group-hover:scale-110 transition-all duration-500">
+                          {action.icon}
+                        </div>
+                        <span className="font-display font-bold text-xs uppercase tracking-widest text-white/40 group-hover:text-white">
+                          {action.name}
+                        </span>
+                      </Link>
+                    ) : (
+                      <>
+                        <div className="mb-3 text-white/60 group-hover:text-white group-hover:scale-110 transition-all duration-500">
+                          {action.icon}
+                        </div>
+                        <span className="font-display font-bold text-xs uppercase tracking-widest text-white/40 group-hover:text-white">
+                          {action.name}
+                        </span>
+                      </>
+                    )}
                   </button>
                 ))}
               </div>
+
+              <AnimatePresence>
+                {showFeedback && (
+                  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onClick={() => setShowFeedback(false)}
+                      className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                    />
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                      className="relative w-full max-w-lg z-10"
+                    >
+                      <FeedbackForm onClose={() => setShowFeedback(false)} />
+                    </motion.div>
+                  </div>
+                )}
+              </AnimatePresence>
               
               <div className="mt-8 bg-black/40 rounded-2xl p-6 border border-white/5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-2">

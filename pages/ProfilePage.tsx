@@ -123,7 +123,7 @@ const ProfilePage: React.FC = () => {
               <div className="flex flex-col items-center gap-3">
                 <div className="relative group">
                   {user.avatar ? (
-                    <img src={user.avatar} alt="Profile" className="w-24 h-24 rounded-full object-cover border-4 border-primary-red" />
+                    <img src={user.avatar} alt="Profile" className="w-24 h-24 rounded-full object-cover border-4 border-electric-blue shadow-lg shadow-electric-blue/20" />
                   ) : (
                     <div className="w-24 h-24 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-4 border-gray-200 dark:border-gray-700">
                       <svg className="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" /></svg>
@@ -135,16 +135,16 @@ const ProfilePage: React.FC = () => {
                   <input type="file" ref={fileInputRef} onChange={handleFileChange} className="hidden" accept="image/*" />
                 </div>
                 <div className="flex gap-4">
-                  <button onClick={handleUploadClick} className="text-xs font-bold text-primary-red hover:underline">Change Photo</button>
+                  <button onClick={handleUploadClick} className="text-xs font-bold text-electric-blue hover:underline">Change Photo</button>
                   {user.avatar && (
                     <button onClick={() => updateUser({ avatar: undefined })} className="text-xs font-bold text-gray-500 hover:text-red-500 hover:underline">Remove</button>
                   )}
                 </div>
               </div>
               <div className="text-center md:text-left">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{user.name}</h1>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">{user.name}</h1>
                 <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
-                <span className="mt-2 inline-block px-3 py-1 bg-primary-red/10 text-primary-red text-xs font-bold rounded-full uppercase tracking-wider">Premium Member</span>
+                <span className="mt-2 inline-block px-3 py-1 bg-electric-blue/10 text-electric-blue text-[10px] font-bold rounded-full uppercase tracking-[0.2em]">Premium Tier</span>
               </div>
             </div>
 
@@ -156,7 +156,7 @@ const ProfilePage: React.FC = () => {
                   onClick={() => setActiveTab(tab)}
                   className={`px-6 py-4 text-sm font-semibold whitespace-nowrap transition-colors border-b-2 ${
                     activeTab === tab 
-                      ? 'border-primary-red text-primary-red' 
+                      ? 'border-electric-blue text-electric-blue' 
                       : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
                   }`}
                 >
@@ -171,26 +171,26 @@ const ProfilePage: React.FC = () => {
                 <form onSubmit={profileForm.handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
-                    <input name="name" value={profileForm.values.name} onChange={profileForm.handleChange} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-red outline-none" />
+                    <input name="name" value={profileForm.values.name} onChange={profileForm.handleChange} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-electric-blue outline-none" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
-                    <input name="email" value={profileForm.values.email} onChange={profileForm.handleChange} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-red outline-none" />
+                    <input name="email" value={profileForm.values.email} onChange={profileForm.handleChange} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-electric-blue outline-none" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
-                    <input name="phone" value={profileForm.values.phone} onChange={profileForm.handleChange} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-red outline-none" />
+                    <input name="phone" value={profileForm.values.phone} onChange={profileForm.handleChange} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-electric-blue outline-none" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Date of Birth</label>
-                    <input type="date" name="dob" value={profileForm.values.dob} onChange={profileForm.handleChange} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-red outline-none" />
+                    <input type="date" name="dob" value={profileForm.values.dob} onChange={profileForm.handleChange} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-electric-blue outline-none" />
                   </div>
                   <div className="md:col-span-2 space-y-2">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Residential Address</label>
-                    <textarea name="address" value={profileForm.values.address} onChange={profileForm.handleChange} rows={3} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-red outline-none" />
+                    <textarea name="address" value={profileForm.values.address} onChange={profileForm.handleChange} rows={3} className="w-full p-3 bg-gray-50 dark:bg-primary-dark border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-electric-blue outline-none" />
                   </div>
                   <div className="md:col-span-2 pt-4">
-                    <button type="submit" disabled={profileForm.isSubmitting} className="bg-primary-red text-white px-8 py-3 rounded-xl font-bold hover:bg-red-700 transition-colors disabled:opacity-50">
+                    <button type="submit" disabled={profileForm.isSubmitting} className="bg-electric-blue text-white px-8 py-3 rounded-xl font-bold hover:bg-electric-blue/80 transition-shadow hover:shadow-lg hover:shadow-electric-blue/20 disabled:opacity-50">
                       {profileForm.isSubmitting ? 'Saving...' : 'Save Profile Changes'}
                     </button>
                     {updateSuccess && <span className="ml-4 text-green-500 font-medium">Changes saved!</span>}
@@ -249,7 +249,7 @@ const ProfilePage: React.FC = () => {
                       <button onClick={() => updateUser({ card: { ...user.card!, isFrozen: !user.card!.isFrozen } })} className={`flex-1 py-3 rounded-xl font-bold transition-colors ${user.card.isFrozen ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700'}`}>
                         {user.card.isFrozen ? 'Unfreeze Card' : 'Freeze Card'}
                       </button>
-                      <button className="flex-1 py-3 bg-primary-red/10 text-primary-red rounded-xl font-bold hover:bg-primary-red/20 transition-colors">
+                      <button className="flex-1 py-3 bg-electric-blue/10 text-electric-blue rounded-xl font-bold hover:bg-electric-blue/20 transition-colors">
                         Report Lost
                       </button>
                     </div>
