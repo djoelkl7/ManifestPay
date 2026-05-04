@@ -14,7 +14,7 @@ const LoanCard: React.FC<{
     status: 'Approved' | 'Rejected' | 'Under Review' | 'Active';
 }> = ({ type, balance, total, nextPayment, date, progress, id, status }) => {
     const statusColors = {
-        'Approved': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+        'Approved': 'bg-green-500/10 text-green-400 border border-green-500/20',
         'Active': 'bg-electric-blue/10 text-electric-blue border border-electric-blue/20',
         'Rejected': 'bg-red-500/10 text-red-500 border border-red-500/20',
         'Under Review': 'bg-soft-cyan/10 text-soft-cyan border border-soft-cyan/20',
@@ -73,16 +73,16 @@ const LoanCard: React.FC<{
             )}
             
             {status === 'Under Review' && (
-                <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/10 rounded-lg border border-yellow-100 dark:border-yellow-900/20">
-                    <p className="text-xs text-yellow-800 dark:text-yellow-300">
+                <div className="mt-4 p-3 bg-soft-cyan/5 dark:bg-soft-cyan/10 rounded-lg border border-soft-cyan/10">
+                    <p className="text-xs text-soft-cyan">
                         Your application is currently being processed by our credit team. Expect a decision within 24-48 hours.
                     </p>
                 </div>
             )}
 
             {status === 'Rejected' && (
-                <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-100 dark:border-red-900/20">
-                    <p className="text-xs text-red-800 dark:text-red-300">
+                <div className="mt-4 p-3 bg-red-500/5 dark:bg-red-500/10 rounded-lg border border-red-500/10">
+                    <p className="text-xs text-red-400">
                         Unfortunately, your application was not approved at this time. You can re-apply in 90 days.
                     </p>
                 </div>
@@ -107,7 +107,7 @@ const LoansOverviewPage: React.FC = () => {
 
                 <section>
                     <h2 className="text-lg font-bold text-light-text dark:text-white mb-4 flex items-center">
-                        <span className="w-2 h-6 bg-blue-500 rounded-full mr-3"></span>
+                        <span className="w-2 h-6 bg-electric-blue rounded-full mr-3"></span>
                         Active Loans
                     </h2>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -136,7 +136,7 @@ const LoansOverviewPage: React.FC = () => {
 
                 <section>
                     <h2 className="text-lg font-bold text-light-text dark:text-white mb-4 flex items-center">
-                        <span className="w-2 h-6 bg-yellow-500 rounded-full mr-3"></span>
+                        <span className="w-2 h-6 bg-soft-cyan rounded-full mr-3"></span>
                         Recent Applications
                     </h2>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

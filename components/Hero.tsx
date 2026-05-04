@@ -11,8 +11,8 @@ const Hero: React.FC = () => {
     >
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-red/10 blur-[120px] rounded-full"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-red/5 blur-[120px] rounded-full"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-electric-blue/10 blur-[120px] rounded-full"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-electric-blue/5 blur-[120px] rounded-full"></div>
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-150"></div>
       </div>
 
@@ -25,14 +25,14 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full mb-8 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-primary-red animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-electric-blue animate-pulse"></span>
               <span className="text-xs font-medium text-white/60 uppercase tracking-widest">Next-Gen Banking is Live</span>
               <ChevronRight size={14} className="text-white/40" />
             </div>
             
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-display font-bold leading-[0.9] mb-8 tracking-tighter">
               Banking for the <br />
-              <span className="text-primary-red">Hyper-Growth</span> Economy
+              <span className="text-electric-blue">Hyper-Growth</span> Economy
             </h1>
             
             <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed font-light">

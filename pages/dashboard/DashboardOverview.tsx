@@ -75,7 +75,7 @@ const DashboardOverview: React.FC = () => {
              </button>
              <button className="p-2 border border-white/10 rounded-lg hover:bg-white/5 transition-colors relative">
                 <Bell size={20} className="text-white/40" />
-                <span className="absolute top-2 right-2 w-2 h-2 bg-primary-red rounded-full border-2 border-black"></span>
+                <span className="absolute top-2 right-2 w-2 h-2 bg-electric-blue rounded-full border-2 border-black"></span>
              </button>
           </div>
         </div>
@@ -100,7 +100,7 @@ const DashboardOverview: React.FC = () => {
                     <p className="text-sm text-white/70 font-mono tracking-tighter">{acc.number}</p>
                   </div>
                   <div className={`flex items-center px-2 py-1 rounded-full text-[10px] font-bold ${
-                    acc.change === 'Stable' ? 'bg-blue-500/10 text-blue-400' : 'bg-green-500/10 text-green-400'
+                    acc.change === 'Stable' ? 'bg-soft-cyan/10 text-soft-cyan' : 'bg-green-500/10 text-green-400'
                   }`}>
                     {acc.change === 'Stable' ? <Clock size={10} className="mr-1" /> : <TrendingUp size={10} className="mr-1" />}
                     {acc.change}
@@ -148,7 +148,7 @@ const DashboardOverview: React.FC = () => {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className={`font-display font-bold text-lg ${item.amount > 0 ? 'text-green-400' : item.amount < 0 ? 'text-red-400' : 'text-blue-400'}`}>
+                      <p className={`font-display font-bold text-lg ${item.amount > 0 ? 'text-green-400' : item.amount < 0 ? 'text-red-500' : 'text-electric-blue'}`}>
                         {item.amount > 0 ? '+' : ''}{item.amount === 0 ? 'Audit' : item.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                       </p>
                     </div>
@@ -231,19 +231,20 @@ const DashboardOverview: React.FC = () => {
               
               <div className="mt-8 bg-black/40 rounded-2xl p-6 border border-white/5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-2">
-                   <ShieldAlert size={40} className="text-primary-red/10" />
+                   <ShieldAlert size={40} className="text-soft-cyan/10" />
                 </div>
-                <p className="text-[10px] text-primary-red font-bold uppercase tracking-[0.2em] mb-2">Notice of Compliance</p>
+                <p className="text-[10px] text-soft-cyan font-bold uppercase tracking-[0.2em] mb-2">Notice of Compliance</p>
                 <p className="text-sm text-white/60 leading-relaxed font-light mb-4">
                   Institutional accounts require periodic biometric authentication. 
                 </p>
-                <button className="btn-primary w-full !py-3 !rounded-xl text-xs uppercase tracking-widest">
-                  Authenticate Identity
+                <button className="btn-primary w-full !py-3 !rounded-xl text-xs uppercase tracking-widest overflow-hidden relative group">
+                  <span className="relative z-10">Authenticate Identity</span>
+                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 </button>
               </div>
               
               <button className="mt-8 group flex items-center justify-center space-x-2 text-white/40 hover:text-white transition-colors">
-                 <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary-red transition-colors">
+                 <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-electric-blue transition-colors">
                    <Plus size={16} />
                  </div>
                  <span className="text-xs font-bold uppercase tracking-widest">Manage Custom Widgets</span>

@@ -18,11 +18,11 @@ const SunIcon: React.FC = () => (
 );
 
 const UserAvatar: React.FC<{ name: string; avatar?: string; onToggle: () => void }> = ({ name, avatar, onToggle }) => (
-  <button onClick={onToggle} className="flex items-center justify-center w-10 h-10 rounded-full text-white text-xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-gray focus:ring-primary-red overflow-hidden transition-transform hover:scale-105">
+  <button onClick={onToggle} className="flex items-center justify-center w-10 h-10 rounded-full text-white text-xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-gray focus:ring-electric-blue overflow-hidden transition-transform hover:scale-105">
     {avatar ? (
         <img src={avatar} alt={name} className="w-full h-full object-cover" />
     ) : (
-        <span className="w-full h-full flex items-center justify-center bg-primary-red/10 border border-primary-red/30 text-primary-red">
+        <span className="w-full h-full flex items-center justify-center bg-electric-blue/10 border border-electric-blue/30 text-electric-blue">
             {name.charAt(0).toUpperCase()}
         </span>
     )}
@@ -57,9 +57,9 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
+    { name: 'Our Thesis', href: '/thesis' },
+    { name: 'Expert Advisory', href: '/dashboard/advisory' },
     { name: 'Investment Plans', href: '/investment-plans' },
-    { name: 'Blog', href: '/#blog' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -81,7 +81,7 @@ const Header: React.FC = () => {
           
           {isLoading ? (
             <div className="flex items-center justify-center w-24 h-10">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-red"></div>
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-electric-blue"></div>
             </div>
           ) : user ? (
             <div className="relative" ref={profileRef}>
@@ -105,8 +105,11 @@ const Header: React.FC = () => {
               )}
             </div>
           ) : (
-            <div className="flex items-center space-x-4">
-               <Link to="/login" className="text-light-text-secondary dark:text-gray-300 hover:text-light-text dark:hover:text-white transition duration-300 font-medium hidden lg:block">
+            <div className="flex items-center space-x-6">
+                <Link to="/institutional-login" className="text-[10px] font-bold text-white/30 hover:text-soft-cyan uppercase tracking-[0.2em] transition-colors hidden lg:block border-r border-white/10 pr-6 mr-2">
+                  Institutional
+                </Link>
+                <Link to="/login" className="text-light-text-secondary dark:text-gray-300 hover:text-light-text dark:hover:text-white transition duration-300 font-medium hidden lg:block">
                   Login
                 </Link>
                 <Link to="/signup" className="btn-primary px-5 py-2 !rounded-md">
@@ -137,7 +140,7 @@ const Header: React.FC = () => {
             
             {isLoading ? (
                <div className="w-full flex justify-center py-4">
-                   <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-red"></div>
+                   <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-electric-blue"></div>
                </div>
             ) : user ? (
                <div className="w-full text-center border-t border-gray-200 dark:border-gray-700 pt-4 mt-2 space-y-4">
@@ -147,16 +150,19 @@ const Header: React.FC = () => {
                  <Link to="/profile" onClick={() => setIsMenuOpen(false)} className="block text-light-text-secondary dark:text-gray-300 hover:text-light-text dark:hover:text-white transition duration-300">
                     Settings
                 </Link>
-                 <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="w-full text-center bg-primary-red text-white font-semibold px-5 py-2 rounded-md hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
+                 <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="w-full text-center bg-electric-blue text-white font-semibold px-5 py-2 rounded-md hover:bg-electric-blue/80 transition-all duration-300 transform hover:scale-105">
                     Sign Out
                 </button>
               </div>
             ) : (
               <div className="w-full flex flex-col space-y-3 pt-2">
+                <Link to="/institutional-login" onClick={() => setIsMenuOpen(false)} className="w-full text-center text-[10px] font-bold text-white/40 uppercase tracking-widest py-2">
+                  Institutional Portal
+                </Link>
                 <Link to="/login" onClick={() => setIsMenuOpen(false)} className="w-full text-center text-light-text-secondary dark:text-gray-300 hover:text-light-text dark:hover:text-white font-medium">
                   Login
                 </Link>
-                <Link to="/signup" onClick={() => setIsMenuOpen(false)} className="w-full text-center bg-primary-red text-white font-semibold px-5 py-2 rounded-md hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
+                <Link to="/signup" onClick={() => setIsMenuOpen(false)} className="w-full text-center bg-electric-blue text-white font-semibold px-5 py-2 rounded-md hover:bg-electric-blue/80 transition-all duration-300 transform hover:scale-105">
                   Sign Up
                 </Link>
               </div>

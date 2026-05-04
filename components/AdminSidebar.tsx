@@ -16,45 +16,48 @@ const AdminSidebar: React.FC = () => {
     { name: 'Loan Approvals', path: '/admin/loans', icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
     )},
+    { name: 'User Feedback', path: '/admin/feedback', icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+    )},
   ];
 
   return (
-    <div className="bg-gray-900 text-white rounded-lg shadow-lg overflow-hidden sticky top-24 h-[calc(100vh-8rem)]">
-      <div className="p-4 bg-gray-800 border-b border-gray-700">
-        <h2 className="text-white font-bold text-lg flex items-center">
-            <span className="bg-red-600 w-2 h-2 rounded-full mr-2"></span>
-            Admin Portal
+    <div className="bg-primary-gray text-white rounded-2xl shadow-xl overflow-hidden sticky top-24 h-[calc(100vh-8rem)] border border-white/5">
+      <div className="p-5 bg-black/40 border-b border-white/5">
+        <h2 className="text-white font-bold text-lg flex items-center tracking-tight">
+            <span className="bg-[#2F6BFF] w-2 h-2 rounded-full mr-2.5 animate-pulse"></span>
+            Admin Core
         </h2>
-        <p className="text-xs text-gray-400 mt-1">Authorized Personnel Only</p>
+        <p className="text-[10px] text-white/30 mt-1 uppercase tracking-widest font-mono">Terminal v2.0.4</p>
       </div>
-      <nav className="p-2">
-        <ul className="space-y-1">
+      <nav className="p-3">
+        <ul className="space-y-1.5">
           {navItems.map((item) => (
             <li key={item.name}>
               <NavLink
                 to={item.path}
                 end={item.path === '/admin'}
                 className={({ isActive }) =>
-                  `flex items-center px-4 py-3 rounded-md transition-colors duration-200 ${
+                  `flex items-center px-4 py-3 rounded-xl transition-all duration-300 ${
                     isActive
-                      ? 'bg-red-600 text-white font-semibold shadow-md'
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                      ? 'bg-[#2F6BFF] text-white font-bold shadow-lg shadow-[#2F6BFF]/20'
+                      : 'text-white/40 hover:bg-white/5 hover:text-white'
                   }`
                 }
               >
-                <span className="mr-3">{item.icon}</span>
-                {item.name}
+                <span className="mr-3 opacity-70">{item.icon}</span>
+                <span className="text-sm tracking-tight">{item.name}</span>
               </NavLink>
             </li>
           ))}
         </ul>
       </nav>
-      <div className="absolute bottom-0 w-full p-4 border-t border-gray-800 bg-gray-900">
+      <div className="absolute bottom-0 w-full p-5 border-t border-white/5 bg-black/20">
           <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-xs font-bold">ADM</div>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2F6BFF] to-[#7B3EFF] flex items-center justify-center text-xs font-bold shadow-lg">ADM</div>
               <div className="ml-3">
-                  <p className="text-sm font-medium">Admin User</p>
-                  <p className="text-xs text-green-400">Online</p>
+                  <p className="text-sm font-bold text-white tracking-tight">System Admin</p>
+                  <p className="text-[10px] text-soft-cyan uppercase tracking-widest font-bold">Encrypted</p>
               </div>
           </div>
       </div>

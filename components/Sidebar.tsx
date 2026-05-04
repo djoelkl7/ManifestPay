@@ -11,12 +11,19 @@ import {
   Receipt, 
   Bell, 
   Settings,
-  CircleUser
+  CircleUser,
+  MessageSquare,
+  BrainCircuit,
+  GraduationCap,
+  ShieldCheck
 } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
   const navItems = [
     { name: 'Overview', path: '/dashboard', icon: <LayoutDashboard size={20} /> },
+    { name: 'Intelligence', path: '/dashboard/intelligence', icon: <BrainCircuit size={20} /> },
+    { name: 'Advisory', path: '/dashboard/advisory', icon: <GraduationCap size={20} /> },
+    { name: 'Compliance', path: '/dashboard/compliance', icon: <ShieldCheck size={20} /> },
     { name: 'Users', path: '/dashboard/users', icon: <Users size={20} /> },
     { name: 'Cards', path: '/dashboard/cards', icon: <CreditCard size={20} /> },
     { name: 'Loans', path: '/dashboard/loans', icon: <Banknote size={20} /> },
@@ -27,13 +34,14 @@ const Sidebar: React.FC = () => {
     { name: 'Statements', path: '/dashboard/statements', icon: <FileText size={20} /> },
     { name: 'Notifications', path: '/dashboard/notifications', icon: <Bell size={20} /> },
     { name: 'Settings', path: '/profile', icon: <Settings size={20} /> },
+    { name: 'Feedback', path: '/dashboard/feedback', icon: <MessageSquare size={20} />, isFeedback: true },
   ];
 
   return (
     <div className="bg-primary-gray rounded-xl shadow-2xl overflow-hidden sticky top-24 border border-white/5">
       <div className="p-5 bg-black/40 border-b border-white/5">
         <h2 className="text-white font-display font-bold text-sm tracking-widest uppercase flex items-center">
-          <span className="w-1.5 h-1.5 bg-primary-red rounded-full mr-2.5 animate-pulse"></span>
+          <span className="w-1.5 h-1.5 bg-electric-blue rounded-full mr-2.5 animate-pulse"></span>
           Core Banking
         </h2>
       </div>
@@ -47,7 +55,7 @@ const Sidebar: React.FC = () => {
                 className={({ isActive }) =>
                   `flex items-center px-4 py-3 rounded-lg transition-all duration-300 group ${
                     isActive
-                      ? 'bg-primary-red text-white font-semibold shadow-lg shadow-primary-red/20'
+                      ? 'bg-electric-blue text-white font-semibold shadow-lg shadow-electric-blue/20'
                       : 'text-white/40 hover:bg-white/5 hover:text-white'
                   }`
                 }

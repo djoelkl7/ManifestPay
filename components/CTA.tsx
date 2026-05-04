@@ -8,12 +8,12 @@ const CTA: React.FC = () => {
   return (
     <section className="py-24 bg-black relative overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary-red/5 blur-[150px] rounded-full"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-electric-blue/5 blur-[150px] rounded-full"></div>
       </div>
       <div className="container mx-auto px-4 text-center relative z-10">
         <AnimatedSection>
           <h2 className="text-4xl sm:text-6xl md:text-7xl font-display font-bold mb-6 text-white tracking-tighter leading-none">
-            Join the <span className="text-primary-red">Elite</span> <br />
+            Join the <span className="text-electric-blue">Elite</span> <br />
             Financial Network
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto mb-12 text-lg sm:text-xl font-light">

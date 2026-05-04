@@ -14,6 +14,8 @@ import InvestmentPlansPage from './pages/InvestmentPlansPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import SignUpPage from './pages/SignUpPage';
+import ThesisPage from './pages/ThesisPage';
+import InstitutionalLoginPage from './pages/InstitutionalLoginPage';
 import PageTransition from './components/PageTransition';
 
 // Dashboard Components
@@ -23,6 +25,10 @@ import TransactionsPage from './pages/dashboard/TransactionsPage';
 import AccountDetailsPage from './pages/dashboard/AccountDetailsPage';
 import NotificationsPage from './pages/dashboard/NotificationsPage';
 import StatementsPage from './pages/dashboard/StatementsPage';
+import FeedbackPage from './pages/dashboard/FeedbackPage';
+import IntelligencePage from './pages/dashboard/IntelligencePage';
+import AdvisoryPage from './pages/dashboard/AdvisoryPage';
+import ComplianceHub from './pages/dashboard/ComplianceHub';
 
 // Transfer Components
 import SendMoneyPage from './pages/transfers/SendMoneyPage';
@@ -46,6 +52,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import UserManagementPage from './pages/admin/UserManagementPage';
 import TransactionMonitorPage from './pages/admin/TransactionMonitorPage';
 import LoanApprovalsPage from './pages/admin/LoanApprovalsPage';
+import FeedbackManagementPage from './pages/admin/FeedbackManagementPage';
 
 const App: React.FC = () => {
   return (
@@ -99,6 +106,22 @@ const App: React.FC = () => {
               element={
                 <PageTransition>
                   <ForgotPassword />
+                </PageTransition>
+              } 
+            />
+            <Route 
+              path="/thesis" 
+              element={
+                <PageTransition>
+                  <ThesisPage />
+                </PageTransition>
+              } 
+            />
+            <Route 
+              path="/institutional-login" 
+              element={
+                <PageTransition>
+                  <InstitutionalLoginPage />
                 </PageTransition>
               } 
             />
@@ -173,12 +196,60 @@ const App: React.FC = () => {
               } 
             />
             <Route 
+              path="/dashboard/intelligence" 
+              element={
+                <PageTransition>
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <IntelligencePage />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                </PageTransition>
+              } 
+            />
+            <Route 
+              path="/dashboard/advisory" 
+              element={
+                <PageTransition>
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <AdvisoryPage />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                </PageTransition>
+              } 
+            />
+            <Route 
+              path="/dashboard/compliance" 
+              element={
+                <PageTransition>
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <ComplianceHub />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                </PageTransition>
+              } 
+            />
+            <Route 
               path="/dashboard/statements" 
               element={
                 <PageTransition>
                   <ProtectedRoute>
                     <DashboardLayout>
                       <StatementsPage />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                </PageTransition>
+              } 
+            />
+            <Route 
+              path="/dashboard/feedback" 
+              element={
+                <PageTransition>
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <FeedbackPage />
                     </DashboardLayout>
                   </ProtectedRoute>
                 </PageTransition>
@@ -369,6 +440,18 @@ const App: React.FC = () => {
                    <ProtectedRoute>
                     <AdminLayout>
                       <LoanApprovalsPage />
+                    </AdminLayout>
+                   </ProtectedRoute>
+                </PageTransition>
+              } 
+            />
+            <Route 
+              path="/admin/feedback" 
+              element={
+                <PageTransition>
+                   <ProtectedRoute>
+                    <AdminLayout>
+                      <FeedbackManagementPage />
                     </AdminLayout>
                    </ProtectedRoute>
                 </PageTransition>
