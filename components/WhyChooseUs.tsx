@@ -8,31 +8,31 @@ const WhyChooseUs: React.FC = () => {
   const features = [
     {
       icon: <Shield className="w-6 h-6" />,
-      title: 'Institutional Grade Security',
-      description: 'Military-grade encryption with multi-sig cold storage for all digital assets.',
+      title: 'Custodial Excellence',
+      description: 'Tier-1 secure custody for digital and traditional assets with multi-layer governance.',
       className: 'md:col-span-2 md:row-span-1',
-      bg: 'bg-gradient-to-br from-zinc-900 to-black'
+      bg: 'bg-gradient-to-br from-[#0B0E14] to-[#020408]'
     },
     {
       icon: <Zap className="w-6 h-6" />,
-      title: 'Quantum Execution',
-      description: 'Sub-millisecond order processing with zero-latency liquidity routing.',
+      title: 'Direct Market Access',
+      description: 'Institutional-grade liquidity across 60+ global exchanges with sub-millisecond precision.',
       className: 'md:col-span-1 md:row-span-1',
       bg: 'bg-electric-blue/10 border-electric-blue/20'
     },
     {
       icon: <Globe className="w-6 h-6" />,
-      title: 'Borderless Finance',
-      description: 'Access 40+ global markets and 150+ currency pairs from a single hub.',
+      title: 'Global Settlements',
+      description: 'Real-time cross-border settlement engine bypassing legacy correspondent banking friction.',
       className: 'md:col-span-1 md:row-span-2',
-      bg: 'bg-zinc-900/50'
+      bg: 'bg-[#0B0E14]/50'
     },
     {
       icon: <Cpu className="w-6 h-6" />,
-      title: 'Algorithmic Optimization',
-      description: 'Self-correcting AI models that adapt to market volatility in real-time.',
+      title: 'Predictive Intel',
+      description: 'Proprietary neural networks analyzing macro-cycles before they manifest in price action.',
       className: 'md:col-span-2 md:row-span-1',
-      bg: 'bg-zinc-900'
+      bg: 'bg-[#0B0E14]'
     }
   ];
 
@@ -42,11 +42,11 @@ const WhyChooseUs: React.FC = () => {
         <AnimatedSection>
           <div className="max-w-3xl mb-16">
             <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">
-              The Engine of <br />
-              <span className="text-electric-blue">Hyper-Growth</span>
+              Institutional <br />
+              <span className="text-white/20">Infrastructure</span>
             </h2>
             <p className="text-white/40 text-lg sm:text-xl font-light leading-relaxed">
-              We've re-engineered the financial stack from the ground up. ManifestPay isn't just a bank; it's a high-performance instrument for capital expansion.
+              We provide the architectural foundation for global wealth expansion. Manifest isn't merely a platform; it's a precision instrument for sophisticated capital deployment.
             </p>
           </div>
         </AnimatedSection>

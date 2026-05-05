@@ -18,11 +18,11 @@ const SunIcon: React.FC = () => (
 );
 
 const UserAvatar: React.FC<{ name: string; avatar?: string; onToggle: () => void }> = ({ name, avatar, onToggle }) => (
-  <button onClick={onToggle} className="flex items-center justify-center w-10 h-10 rounded-full text-white text-xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-gray focus:ring-electric-blue overflow-hidden transition-transform hover:scale-105">
+  <button onClick={onToggle} className="flex items-center justify-center w-9 h-9 rounded-full text-white text-base font-bold focus:outline-none ring-1 ring-white/10 hover:ring-electric-blue/50 overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-lg">
     {avatar ? (
         <img src={avatar} alt={name} className="w-full h-full object-cover" />
     ) : (
-        <span className="w-full h-full flex items-center justify-center bg-electric-blue/10 border border-electric-blue/30 text-electric-blue">
+        <span className="w-full h-full flex items-center justify-center bg-gradient-to-br from-electric-blue to-neon-purple text-white">
             {name.charAt(0).toUpperCase()}
         </span>
     )}
@@ -64,14 +64,14 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className="bg-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/5">
-      <div className="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <header className="bg-black/40 backdrop-blur-xl sticky top-0 z-50 border-white/5">
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center border-b border-white/5">
         <Link to="/" className="text-2xl transition-transform hover:scale-105 duration-300" aria-label="ManifestPay homepage">
           <Logo />
         </Link>
-        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+        <nav className="hidden md:flex items-center space-x-10">
           {navLinks.map((link) => (
-            <Link key={link.name} to={link.href} className="text-light-text-secondary dark:text-gray-300 hover:text-light-text dark:hover:text-white transition duration-300">
+            <Link key={link.name} to={link.href} className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 hover:text-white transition-all duration-300">
               {link.name}
             </Link>
           ))}
@@ -112,8 +112,8 @@ const Header: React.FC = () => {
                 <Link to="/login" className="text-light-text-secondary dark:text-gray-300 hover:text-light-text dark:hover:text-white transition duration-300 font-medium hidden lg:block">
                   Login
                 </Link>
-                <Link to="/signup" className="btn-primary px-5 py-2 !rounded-md">
-                  Sign Up
+                <Link to="/signup" className="btn-primary px-8 py-2.5 text-[10px]">
+                  Join Membership
                 </Link>
             </div>
           )}

@@ -2,27 +2,35 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-dark: #0A0A0A;
-  --color-primary-gray: #1A1A1A;
-  --color-electric-blue: #2F6BFF;
-  --color-neon-purple: #7B3EFF;
-  --color-soft-cyan: #00D1FF;
-  --color-light-gray: #F5F7FA;
+  --color-primary-dark: #020408;
+  --color-primary-gray: #0B0E14;
+  --color-electric-blue: #0A55FF;
+  --color-neon-purple: #6D28D9;
+  --color-soft-cyan: #06B6D4;
+  --color-light-gray: #F8FAFC;
+  
+  --color-success-emerald: #10B981;
+  --color-warning-amber: #F59E0B;
+  --color-danger-rose: #F43F5E;
   
   --color-primary-red: var(--color-electric-blue);
   --color-accent-red: var(--color-soft-cyan);
   
   --color-light-bg: #FFFFFF;
-  --color-light-bg-secondary: var(--color-light-gray);
-  --color-light-text: #111111;
-  --color-light-text-secondary: #666666;
+  --color-light-bg-secondary: #F1F5F9;
+  --color-light-text: #0F172A;
+  --color-light-text-secondary: #475569;
   
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }
 
 body {
   @apply bg-primary-dark text-white antialiased font-sans;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(10, 85, 255, 0.03) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(109, 40, 217, 0.03) 0, transparent 50%);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -30,30 +38,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dashboard-card {
-  @apply bg-primary-gray border border-white/5 transition-all duration-300 backdrop-blur-md;
+  @apply bg-primary-gray/40 border border-white/5 transition-all duration-500 backdrop-blur-xl rounded-2xl overflow-hidden;
 }
 
 .dashboard-card:hover {
-  @apply border-primary-red/50 bg-primary-gray/80 shadow-2xl shadow-primary-red/5;
+  @apply border-electric-blue/30 bg-primary-gray/60 shadow-2xl shadow-electric-blue/5 -translate-y-1;
 }
 
 .btn-primary {
-  @apply bg-primary-red text-white font-bold py-3 px-6 rounded-lg hover:bg-accent-red transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary-red/20 inline-flex items-center justify-center;
+  @apply bg-electric-blue text-white font-semibold py-4 px-8 rounded-full hover:bg-white hover:text-black transition-all duration-500 transform shadow-xl shadow-electric-blue/20 inline-flex items-center justify-center uppercase tracking-widest text-xs;
 }
 
 .btn-secondary {
-  @apply bg-transparent text-white border border-white/20 font-bold py-3 px-6 rounded-lg hover:bg-white/10 transition-all duration-300 inline-flex items-center justify-center;
+  @apply bg-transparent text-white border border-white/10 font-semibold py-4 px-8 rounded-full hover:bg-white/5 transition-all duration-500 inline-flex items-center justify-center uppercase tracking-widest text-xs;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   @apply bg-primary-dark;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/10 rounded-full hover:bg-primary-red transition-colors;
+  @apply bg-white/5 rounded-full hover:bg-electric-blue transition-colors;
 }
 
 .glass-morphism {

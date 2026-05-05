@@ -15,14 +15,13 @@ const DigitalBankingPage: React.FC = () => {
                 <div className="container mx-auto px-6 relative z-10 text-center">
                     <AnimatedSection>
                         <div className="max-w-4xl mx-auto">
-                            <h4 className="text-electric-blue font-mono text-sm uppercase tracking-[0.4em] mb-6">Core Infrastructure</h4>
-                            <h1 className="text-6xl md:text-8xl font-display font-bold leading-[0.9] tracking-tighter mb-10">
-                                Digital <br />
-                                <span className="text-white/20 italic">Intelligence </span>
-                                Banking
+                            <h4 className="text-electric-blue font-mono text-[10px] uppercase tracking-[0.6em] mb-8">Infrastructure Layer</h4>
+                            <h1 className="text-7xl md:text-9xl font-display font-bold leading-[0.85] tracking-tighter mb-12">
+                                Monetary <br />
+                                <span className="text-white/20">Protocols</span>
                             </h1>
-                            <p className="text-xl text-white/60 font-light leading-relaxed max-w-2xl mx-auto">
-                                The Manifest Core is a proprietary settlement layer designed for the high-velocity, global economy. No delays, no legacy friction.
+                            <p className="text-xl text-white/40 font-light leading-relaxed max-w-2xl mx-auto">
+                                The Manifest Core is a high-availability settlement layer for global operations. A clinical approach to asset velocity and security governance.
                             </p>
                         </div>
                     </AnimatedSection>

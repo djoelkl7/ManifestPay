@@ -20,14 +20,14 @@ const AssetManagementPage: React.FC = () => {
                                 <span className="w-2 h-2 rounded-full bg-electric-blue animate-pulse"></span>
                                 <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">Active Asset Management</span>
                             </div>
-                            <h1 className="text-6xl md:text-8xl font-display font-bold leading-[0.9] tracking-tighter mb-10">
-                                Institutional <br />
-                                <span className="text-electric-blue">Capital </span>
-                                Orchestration
-                            </h1>
-                            <p className="text-xl text-white/60 font-light leading-relaxed max-w-2xl">
-                                We go beyond simple allocation. Our Asset Management suite provides the tools and intelligence needed to navigate complex global markets with surgical precision.
-                            </p>
+            <h1 className="text-7xl md:text-9xl font-display font-bold leading-[0.85] tracking-tighter mb-10">
+                Strategic <br />
+                <span className="text-white/20">Capital </span>
+                Engine
+            </h1>
+            <p className="text-xl text-white/40 font-light leading-relaxed max-w-2xl">
+                Precision orchestration of global capital. Our management suite integrates high-frequency data with proprietary quantitative models for the institutional elite.
+            </p>
                         </div>
                     </AnimatedSection>
                 </div>

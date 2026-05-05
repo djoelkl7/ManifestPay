@@ -14,76 +14,76 @@ const LoanCard: React.FC<{
     status: 'Approved' | 'Rejected' | 'Under Review' | 'Active';
 }> = ({ type, balance, total, nextPayment, date, progress, id, status }) => {
     const statusColors = {
-        'Approved': 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20',
+        'Approved': 'bg-success-emerald/10 text-success-emerald border border-success-emerald/20',
         'Active': 'bg-electric-blue/10 text-electric-blue border border-electric-blue/20',
-        'Rejected': 'bg-rose-500/10 text-rose-500 border border-rose-500/20',
-        'Under Review': 'bg-amber-500/10 text-amber-500 border border-amber-500/20',
+        'Rejected': 'bg-danger-rose/10 text-danger-rose border border-danger-rose/20',
+        'Under Review': 'bg-warning-amber/10 text-warning-amber border border-warning-amber/20',
     };
 
     const borderColors = {
-        'Approved': 'border-emerald-500',
+        'Approved': 'border-success-emerald',
         'Active': 'border-electric-blue',
-        'Rejected': 'border-rose-500',
-        'Under Review': 'border-amber-500',
+        'Rejected': 'border-danger-rose',
+        'Under Review': 'border-warning-amber',
     };
 
     return (
-        <div className={`bg-white dark:bg-primary-gray rounded-lg shadow-md p-6 border-l-4 ${borderColors[status]} hover:shadow-lg transition-shadow`}>
-            <div className="flex justify-between items-start mb-4">
+        <div className={`dashboard-card p-8 border-l-4 ${borderColors[status]} group`}>
+            <div className="flex justify-between items-start mb-6">
                 <div>
-                    <div className="flex items-center gap-3 mb-1">
-                        <h3 className="text-xl font-bold text-light-text dark:text-white">{type} Loan</h3>
-                        <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${statusColors[status]}`}>
+                    <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-2xl font-bold text-white tracking-tight">{type} Loan</h3>
+                        <span className={`px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${statusColors[status]}`}>
                             {status}
                         </span>
                     </div>
-                    <p className="text-sm text-light-text-secondary dark:text-gray-400">ID: {id}</p>
+                    <p className="text-[10px] font-mono text-white/20 uppercase tracking-widest">ID: {id}</p>
                 </div>
-                <Link to={`/dashboard/loans/${id}`} className="text-sm font-semibold text-blue-500 hover:underline">View Details</Link>
+                <Link to={`/dashboard/loans/${id}`} className="text-xs font-bold text-electric-blue hover:text-white uppercase tracking-widest transition-colors">Details</Link>
             </div>
             
-            <div className="mb-4">
-                <div className="flex justify-between text-sm mb-1">
-                    <span className="text-light-text-secondary dark:text-gray-400">
-                        {status === 'Under Review' || status === 'Rejected' ? 'Requested Amount' : 'Outstanding Balance'}
+            <div className="mb-6">
+                <div className="flex justify-between text-xs mb-2">
+                    <span className="text-white/40 uppercase tracking-widest font-medium">
+                        {status === 'Under Review' || status === 'Rejected' ? 'Requested Principal' : 'Outstanding Balance'}
                     </span>
-                    <span className="font-bold text-light-text dark:text-white">{balance}</span>
+                    <span className="font-bold text-white text-lg">{balance}</span>
                 </div>
                 {progress !== undefined && (
                     <>
-                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                            <div className="bg-electric-blue h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
+                        <div className="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
+                            <div className="bg-electric-blue h-full rounded-full" style={{ width: `${progress}%` }}></div>
                         </div>
-                        <p className="text-xs text-right mt-1 text-light-text-secondary dark:text-gray-500">of {total} Principal</p>
+                        <p className="text-[10px] text-right mt-2 text-white/20 font-mono">OF {total} PRINCIPAL</p>
                     </>
                 )}
             </div>
 
             {nextPayment && date && (
-                <div className="bg-electric-blue/5 dark:bg-electric-blue/10 p-3 rounded-md flex justify-between items-center border border-electric-blue/10">
+                <div className="bg-white/5 p-4 rounded-2xl flex justify-between items-center border border-white/5">
                     <div>
-                        <p className="text-xs text-electric-blue font-semibold">Next Payment</p>
-                        <p className="text-sm font-bold text-light-text dark:text-white uppercase tracking-tighter">{nextPayment}</p>
+                        <p className="text-[10px] text-electric-blue font-bold uppercase tracking-widest mb-1">Next Payment</p>
+                        <p className="text-lg font-bold text-white tracking-tight">{nextPayment}</p>
                     </div>
                     <div className="text-right">
-                        <p className="text-xs text-light-text-secondary dark:text-gray-400">Due Date</p>
-                        <p className="text-sm font-medium text-light-text dark:text-white">{date}</p>
+                        <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest mb-1">Due Date</p>
+                        <p className="text-sm font-medium text-white">{date}</p>
                     </div>
                 </div>
             )}
             
             {status === 'Under Review' && (
-                <div className="mt-4 p-3 bg-amber-500/5 dark:bg-amber-500/10 rounded-lg border border-amber-500/10">
-                    <p className="text-xs text-amber-500">
-                        Your application is currently being processed by our credit team. Expect a decision within 24-48 hours.
+                <div className="mt-6 p-4 bg-warning-amber/5 rounded-2xl border border-warning-amber/10">
+                    <p className="text-xs text-warning-amber/80 leading-relaxed">
+                        Sovereign verification in progress. Our credit committee will finalize the decision within 24 standard business hours.
                     </p>
                 </div>
             )}
 
             {status === 'Rejected' && (
-                <div className="mt-4 p-3 bg-rose-500/5 dark:bg-rose-500/10 rounded-lg border border-rose-500/10">
-                    <p className="text-xs text-rose-400">
-                        Unfortunately, your application was not approved at this time. You can re-apply in 90 days.
+                <div className="mt-6 p-4 bg-danger-rose/5 rounded-2xl border border-danger-rose/10">
+                    <p className="text-xs text-danger-rose/80 leading-relaxed">
+                        Institutional criteria not met for this specific instrument. Re-application eligibility resets in 90 days.
                     </p>
                 </div>
             )}
@@ -94,23 +94,23 @@ const LoanCard: React.FC<{
 const LoansOverviewPage: React.FC = () => {
     return (
         <AnimatedSection>
-            <div className="space-y-8">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="space-y-12 pb-20">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div>
-                        <h1 className="text-2xl font-bold text-light-text dark:text-white">Loans & Lending</h1>
-                        <p className="text-light-text-secondary dark:text-gray-400">Manage your existing loans or apply for new financing.</p>
+                        <h1 className="text-3xl font-bold text-white tracking-tight">Debt Capital Markets</h1>
+                        <p className="text-white/40 text-sm mt-1">Manage active credit facilities or initiate high-leverage financing sessions.</p>
                     </div>
-                    <Link to="/dashboard/loans/apply" className="bg-electric-blue text-white font-bold py-3 px-8 rounded-xl hover:bg-electric-blue/80 transition-all shadow-lg shadow-electric-blue/20 transform hover:scale-[1.02] active:scale-[0.98]">
-                        Apply for New Loan
+                    <Link to="/dashboard/loans/apply" className="btn-primary px-8 py-3 rounded-xl text-sm">
+                        Initiate Application
                     </Link>
                 </div>
 
                 <section>
-                    <h2 className="text-lg font-bold text-light-text dark:text-white mb-4 flex items-center">
-                        <span className="w-2 h-6 bg-electric-blue rounded-full mr-3"></span>
-                        Active Loans
-                    </h2>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="flex items-center gap-3 mb-8">
+                        <div className="w-1.5 h-8 bg-electric-blue rounded-full"></div>
+                        <h2 className="text-xl font-bold text-white tracking-tight uppercase tracking-[0.2em]">Active Facilities</h2>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <LoanCard 
                             id="LN-2023-882"
                             type="Personal" 
@@ -135,11 +135,11 @@ const LoansOverviewPage: React.FC = () => {
                 </section>
 
                 <section>
-                    <h2 className="text-lg font-bold text-light-text dark:text-white mb-4 flex items-center">
-                        <span className="w-2 h-6 bg-amber-500 rounded-full mr-3"></span>
-                        Recent Applications
-                    </h2>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="flex items-center gap-3 mb-8">
+                        <div className="w-1.5 h-8 bg-warning-amber rounded-full"></div>
+                        <h2 className="text-xl font-bold text-white tracking-tight uppercase tracking-[0.2em]">Pending Requests</h2>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <LoanCard 
                             id="APP-2024-012"
                             type="Business" 
@@ -164,11 +164,12 @@ const LoansOverviewPage: React.FC = () => {
                     </div>
                 </section>
 
-                <div className="bg-gradient-to-r from-gray-900 to-black rounded-lg shadow-xl p-8 text-white text-center">
-                    <h2 className="text-2xl font-bold mb-4">Need Quick Cash?</h2>
-                    <p className="mb-6 opacity-90 max-w-2xl mx-auto">Get approved for a personal loan up to $50,000 in minutes. Low interest rates starting from 5.99% APR.</p>
-                    <Link to="/dashboard/loans/apply" className="inline-block bg-white text-black font-bold py-2 px-8 rounded-full hover:bg-gray-200 transition-colors">
-                        Check Your Rate
+                <div className="bg-[#0B0E14] rounded-[2.5rem] p-12 border border-white/5 text-center relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-electric-blue/5 blur-[100px] rounded-full"></div>
+                    <h2 className="text-3xl font-display font-bold mb-4 tracking-tight">Institutional Credit Reserve</h2>
+                    <p className="text-white/40 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Unlock access up to $5.0M in debt capital with preferential rates starting at 4.25% APR for sovereign members.</p>
+                    <Link to="/dashboard/loans/apply" className="btn-primary px-12 py-4 rounded-full text-lg">
+                        Check Eligibility
                     </Link>
                 </div>
             </div>

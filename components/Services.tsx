@@ -17,17 +17,17 @@ const ServiceCard: React.FC<{
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay }}
-    className="group bg-zinc-900/40 p-8 rounded-[2rem] border border-white/5 hover:border-electric-blue/50 hover:bg-zinc-900/60 transition-all duration-500 h-full flex flex-col relative overflow-hidden"
+    className="group bg-[#0B0E14]/40 p-10 rounded-[2.5rem] border border-white/5 hover:border-electric-blue/30 hover:bg-[#0B0E14]/80 transition-all duration-700 h-full flex flex-col relative overflow-hidden"
   >
-    <div className="absolute top-0 right-0 w-32 h-32 bg-electric-blue/5 blur-[60px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-electric-blue/20 transition-colors duration-500"></div>
+    <div className="absolute top-0 right-0 w-48 h-48 bg-electric-blue/5 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-electric-blue/10 transition-colors duration-700"></div>
     
-    <div className="mb-8 w-14 h-14 rounded-2xl bg-black flex items-center justify-center text-electric-blue group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 border border-white/5 shadow-2xl relative z-10">
+    <div className="mb-10 w-16 h-16 rounded-2xl bg-black flex items-center justify-center text-electric-blue group-hover:scale-110 group-hover:-rotate-3 transition-all duration-700 border border-white/5 shadow-2xl relative z-10">
       {icon}
     </div>
     
     <div className="relative z-10 flex-grow">
-      <h3 className="text-2xl font-bold text-white mb-4 tracking-tight group-hover:text-electric-blue transition-colors">{title}</h3>
-      <p className="text-white/40 leading-relaxed font-light mb-8 group-hover:text-white/60 transition-colors">{description}</p>
+      <h3 className="text-3xl font-bold text-white mb-5 tracking-tight group-hover:text-electric-blue transition-colors">{title}</h3>
+      <p className="text-white/40 leading-relaxed font-light mb-10 group-hover:text-white/60 transition-colors text-lg">{description}</p>
     </div>
     
     {link && (

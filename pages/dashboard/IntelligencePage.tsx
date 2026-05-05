@@ -15,8 +15,8 @@ const IntelligencePage: React.FC = () => {
                         </h1>
                         <p className="text-white/40 text-sm mt-1">Autonomous financial engine synthesizing 40M+ data points daily.</p>
                     </div>
-                    <div className="flex items-center gap-2 px-3 py-1.5 bg-electric-blue/10 border border-electric-blue/20 rounded-full">
-                        <span className="w-2 h-2 bg-electric-blue rounded-full animate-pulse"></span>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-[#0A55FF]/10 border border-[#0A55FF]/20 rounded-full">
+                        <span className="w-2 h-2 bg-electric-blue rounded-full animate-pulse shadow-[0_0_10px_rgba(10,85,255,0.5)]"></span>
                         <span className="text-[10px] font-bold text-electric-blue uppercase tracking-widest">Neural Layer Active</span>
                     </div>
                 </div>
@@ -27,20 +27,20 @@ const IntelligencePage: React.FC = () => {
                 {[
                     { label: 'Risk Vector', value: 'Low-B+', change: '-2.4%', icon: <ShieldAlert size={20} />, color: 'text-soft-cyan' },
                     { label: 'Execution Efficiency', value: '99.98%', change: '+0.12%', icon: <Zap size={20} />, color: 'text-electric-blue' },
-                    { label: 'Proprietary Yield Index', value: '14.2%', change: '+1.4%', icon: <TrendingUp size={20} />, color: 'text-green-400' }
+                    { label: 'Proprietary Yield Index', value: '14.2%', change: '+1.4%', icon: <TrendingUp size={20} />, color: 'text-success-emerald' }
                 ].map((stat, i) => (
                     <AnimatedSection key={i} delay={i * 100}>
-                        <div className="bg-primary-gray p-6 rounded-2xl border border-white/5 relative overflow-hidden group">
-                           <div className="flex justify-between items-start mb-4">
-                                <div className={`p-2 rounded-xl bg-white/5 ${stat.color}`}>
+                        <div className="dashboard-card p-8 group">
+                           <div className="flex justify-between items-start mb-6">
+                                <div className={`p-3 rounded-2xl bg-white/5 ${stat.color} border border-white/5`}>
                                     {stat.icon}
                                 </div>
-                                <span className={`text-[10px] font-mono font-bold ${stat.change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
+                                <span className={`text-[10px] font-mono font-bold ${stat.change.startsWith('+') ? 'text-success-emerald' : 'text-danger-rose'}`}>
                                     {stat.change}
                                 </span>
                            </div>
-                           <p className="text-[10px] text-white/40 uppercase tracking-[0.2em] mb-1">{stat.label}</p>
-                           <h3 className="text-2xl font-bold text-white font-mono tracking-tighter">{stat.value}</h3>
+                           <p className="text-[10px] text-white/40 uppercase tracking-[0.3em] mb-2">{stat.label}</p>
+                           <h3 className="text-3xl font-bold text-white font-mono tracking-tighter">{stat.value}</h3>
                         </div>
                     </AnimatedSection>
                 ))}

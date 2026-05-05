@@ -16,14 +16,14 @@ const ThesisPage: React.FC = () => {
                 <div className="container mx-auto px-6 relative z-10">
                     <AnimatedSection>
                         <div className="max-w-4xl">
-                            <h4 className="text-electric-blue font-mono text-sm uppercase tracking-[0.4em] mb-6">Our Core Thesis</h4>
-                            <h1 className="text-6xl md:text-8xl font-display font-bold leading-[0.9] tracking-tighter mb-10">
+                            <h4 className="text-electric-blue font-mono text-[10px] uppercase tracking-[0.6em] mb-8">Strategic Manifesto</h4>
+                            <h1 className="text-7xl md:text-9xl font-display font-bold leading-[0.85] tracking-tighter mb-10">
                                 The Future <br />
-                                <span className="text-white/40">is </span>
-                                <span className="italic">Programmatic.</span>
+                                <span className="text-white/20">is </span>
+                                <span className="italic">Automated.</span>
                             </h1>
-                            <p className="text-xl md:text-2xl text-white/60 font-light leading-relaxed max-w-2xl">
-                                ManifestPay operates on the radical belief that financial systems should be as fluid, transparent, and resilient as the technology they are built upon.
+                            <p className="text-xl md:text-2xl text-white/40 font-light leading-relaxed max-w-2xl">
+                                We operate on the foundational belief that capital systems should be as fluid, transparent, and resilient as the algorithmic foundations they inhabit.
                             </p>
                         </div>
                     </AnimatedSection>

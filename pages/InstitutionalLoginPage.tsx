@@ -26,26 +26,28 @@ const InstitutionalLoginPage: React.FC = () => {
         <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
             {/* Ambient Background */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#2F6BFF10,transparent_50%)]"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#0A55FF08,transparent_50%)]"></div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-[1px] border-white/5 rounded-full animate-pulse-slow"></div>
+                {/* Hardware Key Visual Hint */}
+                <div className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-electric-blue/5 blur-[100px] rounded-full"></div>
             </div>
 
             <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
                 className="w-full max-w-md relative z-10"
             >
-                <div className="text-center mb-12">
-                    <Link to="/" className="inline-block transform hover:scale-105 transition-transform duration-300">
+                <div className="text-center mb-16">
+                    <Link to="/" className="inline-block transform hover:scale-105 transition-transform duration-500">
                         <Logo />
                     </Link>
-                    <div className="mt-8 space-y-2">
-                        <h1 className="text-2xl font-bold tracking-tight">Institutional Terminal</h1>
-                        <p className="text-white/40 text-sm uppercase tracking-[0.3em] font-mono">Secure Access Gateway v4.2</p>
+                    <div className="mt-10 space-y-3">
+                        <h1 className="text-3xl font-display font-bold tracking-tighter">Institutional Terminal</h1>
+                        <p className="text-white/20 text-[10px] uppercase tracking-[0.4em] font-mono">Secure Access Gateway v6.0_BETA</p>
                     </div>
                 </div>
 
-                <div className="bg-primary-gray p-8 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden group">
+                <div className="bg-[#0B0E14] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden group backdrop-blur-xl">
                     <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-electric-blue to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                     
                     <form onSubmit={handleNext} className="space-y-8">
@@ -113,7 +115,7 @@ const InstitutionalLoginPage: React.FC = () => {
                         <button 
                             type="submit"
                             disabled={isAuthenticating}
-                            className="w-full bg-electric-blue text-white font-bold py-4 rounded-2xl hover:bg-electric-blue/80 transition-all shadow-xl shadow-electric-blue/20 flex items-center justify-center group"
+                            className="btn-primary w-full py-5 rounded-2xl group shadow-2xl shadow-electric-blue/10"
                         >
                             {isAuthenticating ? (
                                 <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>

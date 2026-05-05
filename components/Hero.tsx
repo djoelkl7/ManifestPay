@@ -30,13 +30,15 @@ const Hero: React.FC = () => {
               <ChevronRight size={14} className="text-white/40" />
             </div>
             
-            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-display font-bold leading-[0.9] mb-8 tracking-tighter">
-              Banking for the <br />
-              <span className="text-electric-blue">Hyper-Growth</span> Economy
+            <h1 className="text-6xl sm:text-8xl lg:text-9xl font-display font-bold leading-[0.85] mb-10 tracking-tighter">
+              Sovereign <br />
+              <span className="text-white/20">Capital </span>
+              Systems
             </h1>
             
-            <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-              Experience the power of precision finance. ManifestPay empowers your global journey with high-performance accounts and elite security.
+            <p className="text-xl text-white/40 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+              The new standard for institutional wealth management. <br className="hidden md:block" />
+              High-velocity infrastructure for the next generation of global capital.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
