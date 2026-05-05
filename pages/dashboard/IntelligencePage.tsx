@@ -15,8 +15,8 @@ const IntelligencePage: React.FC = () => {
                         </h1>
                         <p className="text-white/40 text-sm mt-1">Autonomous financial engine synthesizing 40M+ data points daily.</p>
                     </div>
-                    <div className="flex items-center gap-2 px-4 py-2 bg-[#0A55FF]/10 border border-[#0A55FF]/20 rounded-full">
-                        <span className="w-2 h-2 bg-electric-blue rounded-full animate-pulse shadow-[0_0_10px_rgba(10,85,255,0.5)]"></span>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-electric-blue/10 border border-electric-blue/20 rounded-full">
+                        <span className="w-2 h-2 bg-electric-blue rounded-full animate-pulse shadow-[0_0_10px_rgba(255,102,0,0.5)]"></span>
                         <span className="text-[10px] font-bold text-electric-blue uppercase tracking-widest">Neural Layer Active</span>
                     </div>
                 </div>

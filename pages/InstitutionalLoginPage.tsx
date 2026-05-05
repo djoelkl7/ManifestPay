@@ -25,8 +25,8 @@ const InstitutionalLoginPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
             {/* Ambient Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#0A55FF08,transparent_50%)]"></div>
+            <div className="absolute inset-0 z-0 text-white">
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,102,0,0.06),transparent_50%)]"></div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-[1px] border-white/5 rounded-full animate-pulse-slow"></div>
                 {/* Hardware Key Visual Hint */}
                 <div className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-electric-blue/5 blur-[100px] rounded-full"></div>

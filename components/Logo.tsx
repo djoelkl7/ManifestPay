@@ -6,31 +6,21 @@ const Logo: React.FC = () => {
     <div className="flex items-center group">
       <div className="relative mr-2.5">
         <svg
-          width="34"
-          height="34"
+          width="40"
+          height="40"
           viewBox="0 0 40 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="h-9 w-auto transform transition-transform group-hover:rotate-12 duration-500"
+          className="h-9 w-auto transform transition-all group-hover:scale-110 duration-500"
           aria-hidden="true"
         >
-          <path
-            d="M20 2L38 34H2L20 2Z"
-            fill="transparent"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            className="text-white/20"
-          />
-          <path
-            d="M20 8L32 29H8L20 8Z"
-            fill="currentColor"
-            className="text-primary-red"
-          />
-          <circle cx="20" cy="23" r="3" fill="white" />
+          <path d="M12 8L24 20L12 32" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="text-white/20" />
+          <path d="M20 8L32 20L20 32" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="text-primary-red" />
+          <path d="M28 8L36 16M28 32L36 24" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="text-white/40" />
         </svg>
       </div>
-      <span className="font-display font-bold text-xl tracking-tight text-white group-hover:text-primary-red transition-colors duration-300">
-        Manifest<span className="text-primary-red group-hover:text-white transition-colors duration-300">Pay</span>
+      <span className="font-display font-bold text-xl tracking-tight text-white group-hover:text-electric-blue transition-colors duration-300">
+        Manifest<span className="text-electric-blue transition-colors duration-300">Pay</span>
       </span>
     </div>
   );

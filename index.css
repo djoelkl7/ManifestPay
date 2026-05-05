@@ -2,12 +2,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-dark: #020408;
-  --color-primary-gray: #0B0E14;
-  --color-electric-blue: #0A55FF;
-  --color-neon-purple: #6D28D9;
-  --color-soft-cyan: #06B6D4;
-  --color-light-gray: #F8FAFC;
+  --color-primary-dark: #0A0F1A;
+  --color-primary-gray: #151C2A;
+  --color-electric-blue: #FF6600;
+  --color-neon-purple: #0047AB;
+  --color-soft-cyan: #FF8533;
+  --color-light-gray: #F1F5F9;
   
   --color-success-emerald: #10B981;
   --color-warning-amber: #F59E0B;
@@ -17,9 +17,9 @@
   --color-accent-red: var(--color-soft-cyan);
   
   --color-light-bg: #FFFFFF;
-  --color-light-bg-secondary: #F1F5F9;
+  --color-light-bg-secondary: #F8FAFC;
   --color-light-text: #0F172A;
-  --color-light-text-secondary: #475569;
+  --color-light-text-secondary: #64748B;
   
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", "Inter", sans-serif;
@@ -29,8 +29,8 @@
 body {
   @apply bg-primary-dark text-white antialiased font-sans;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(10, 85, 255, 0.03) 0, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(109, 40, 217, 0.03) 0, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(255, 102, 0, 0.04) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(0, 71, 171, 0.04) 0, transparent 50%);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -46,11 +46,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  @apply bg-electric-blue text-white font-semibold py-4 px-8 rounded-full hover:bg-white hover:text-black transition-all duration-500 transform shadow-xl shadow-electric-blue/20 inline-flex items-center justify-center uppercase tracking-widest text-xs;
+  @apply bg-electric-blue text-white font-bold py-4 px-10 rounded-full hover:bg-[#E3532A] transition-all duration-300 transform shadow-xl shadow-electric-blue/10 inline-flex items-center justify-center uppercase tracking-widest text-[10px];
 }
 
 .btn-secondary {
-  @apply bg-transparent text-white border border-white/10 font-semibold py-4 px-8 rounded-full hover:bg-white/5 transition-all duration-500 inline-flex items-center justify-center uppercase tracking-widest text-xs;
+  @apply bg-transparent text-white border border-white/20 font-bold py-4 px-10 rounded-full hover:bg-white/5 transition-all duration-300 inline-flex items-center justify-center uppercase tracking-widest text-[10px];
 }
 
 /* Custom Scrollbar */

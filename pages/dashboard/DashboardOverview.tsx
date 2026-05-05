@@ -31,10 +31,10 @@ const DashboardOverview: React.FC = () => {
   ];
 
   const recentActivity = [
-    { id: 1, desc: 'Gold Payment Settlement', date: 'Today, 11:20 AM', amount: 4200000.00, type: 'credit', icon: <TrendingUp className="text-green-400" /> },
-    { id: 2, desc: 'Account Verification Fee', date: 'Yesterday, 4:45 PM', amount: -250.00, type: 'debit', icon: <CreditCard className="text-red-400" /> },
-    { id: 3, desc: 'International Wire Transfer', date: 'Jul 21, 10:15 AM', amount: 850000.00, type: 'credit', icon: <ArrowUpRight className="text-green-400" /> },
-    { id: 4, desc: 'Security Compliance Audit', date: 'Jul 20, 09:00 AM', amount: 0.00, type: 'transfer', icon: <ShieldAlert className="text-blue-400" /> },
+    { id: 1, desc: 'Gold Payment Settlement', date: 'Today, 11:20 AM', amount: 4200000.00, type: 'credit', icon: <TrendingUp className="text-success-emerald" /> },
+    { id: 2, desc: 'Account Verification Fee', date: 'Yesterday, 4:45 PM', amount: -250.00, type: 'debit', icon: <CreditCard className="text-danger-rose" /> },
+    { id: 3, desc: 'International Wire Transfer', date: 'Jul 21, 10:15 AM', amount: 850000.00, type: 'credit', icon: <ArrowUpRight className="text-success-emerald" /> },
+    { id: 4, desc: 'Security Compliance Audit', date: 'Jul 20, 09:00 AM', amount: 0.00, type: 'transfer', icon: <ShieldAlert className="text-electric-blue" /> },
   ];
 
   return (
