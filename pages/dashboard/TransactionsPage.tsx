@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import AnimatedSection from '../../components/AnimatedSection';
+import { Search, Globe, ChevronUp, ChevronDown, ArrowUpDown } from 'lucide-react';
 
 interface Transaction {
   id: string;
@@ -21,79 +22,140 @@ const mockTransactions: Transaction[] = [
 const TransactionsPage: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCategory, setFilterCategory] = useState('All');
+    const [sortDirection, setSortDirection] = useState<'asc' | 'desc' | null>(null);
+
+    const handleSortAmount = () => {
+        if (sortDirection === null) setSortDirection('desc');
+        else if (sortDirection === 'desc') setSortDirection('asc');
+        else setSortDirection(null);
+    };
+
+    const toggleGoogleSearch = () => {
+        if (searchTerm) {
+            const query = encodeURIComponent(`${searchTerm} financial news`);
+            window.open(`https://www.google.com/search?q=${query}`, '_blank');
+        } else {
+            window.open(`https://www.google.com/search?q=latest+financial+market+news`, '_blank');
+        }
+    };
 
     const filteredTransactions = useMemo(() => {
-        return mockTransactions.filter(t => {
+        let result = mockTransactions.filter(t => {
             const matchesSearch = t.description.toLowerCase().includes(searchTerm.toLowerCase());
             const matchesCategory = filterCategory === 'All' || t.category === filterCategory;
             return matchesSearch && matchesCategory;
         });
-    }, [searchTerm, filterCategory]);
+
+        if (sortDirection) {
+            result = [...result].sort((a, b) => {
+                if (sortDirection === 'asc') return a.amount - b.amount;
+                return b.amount - a.amount;
+            });
+        }
+
+        return result;
+    }, [searchTerm, filterCategory, sortDirection]);
 
     return (
         <AnimatedSection>
-            <div className="bg-primary-gray rounded-lg shadow-xl p-6 border border-gray-800">
-                <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                    <h1 className="text-2xl font-bold text-white">Audit & Transaction Log</h1>
+            <div className="space-y-8 pb-20">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div>
+                        <h1 className="text-3xl font-display font-bold text-white tracking-tight">Audit & Telemetry Log</h1>
+                        <p className="text-white/40 text-sm mt-1">Real-time settlement surveillance and immutable transaction ledger.</p>
+                    </div>
                     <div className="flex gap-4 w-full md:w-auto">
-                         <input 
-                            type="text" 
-                            placeholder="Search descriptions..." 
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full md:w-64 bg-black/40 border border-gray-800 rounded-md p-2 text-white focus:ring-2 focus:ring-primary-red focus:outline-none"
-                         />
-                         <select 
-                            value={filterCategory}
-                            onChange={(e) => setFilterCategory(e.target.value)}
-                            className="bg-black/40 border border-gray-800 rounded-md p-2 text-white focus:ring-2 focus:ring-primary-red focus:outline-none"
-                         >
-                             <option value="All">All Categories</option>
-                             <option value="Gold Assets">Gold Assets</option>
-                             <option value="Income">Income</option>
-                             <option value="Banking">Banking</option>
-                             <option value="Compliance">Compliance</option>
-                         </select>
+                        <button 
+                            onClick={toggleGoogleSearch}
+                            className="bg-white/5 border border-white/10 hover:border-electric-blue hover:text-electric-blue transition-all px-4 py-2 rounded-xl flex items-center gap-2 group text-white/60"
+                        >
+                            <Globe size={18} className="group-hover:animate-pulse" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest">Market Intel</span>
+                        </button>
                     </div>
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="border-b border-gray-800">
-                                <th className="p-4 text-gray-400 font-bold uppercase text-[10px] tracking-widest">Reference ID</th>
-                                <th className="p-4 text-gray-400 font-bold uppercase text-[10px] tracking-widest">Description</th>
-                                <th className="p-4 text-gray-400 font-bold uppercase text-[10px] tracking-widest">Category</th>
-                                <th className="p-4 text-gray-400 font-bold uppercase text-[10px] tracking-widest">Status</th>
-                                <th className="p-4 text-gray-400 font-bold uppercase text-[10px] tracking-widest text-right">Credit/Debit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredTransactions.map(t => (
-                                <tr key={t.id} className="border-b border-gray-900 hover:bg-black/20 transition-colors">
-                                    <td className="p-4 text-gray-500 font-mono text-xs">{t.id}</td>
-                                    <td className="p-4 font-semibold text-white">{t.description}</td>
-                                    <td className="p-4">
-                                        <span className="bg-gray-800 text-gray-300 px-2 py-1 rounded text-[10px] font-bold uppercase">
-                                            {t.category}
-                                        </span>
-                                    </td>
-                                    <td className="p-4">
-                                        <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
-                                            t.status === 'Completed' ? 'text-green-500 bg-green-900/20' : 
-                                            t.status === 'Flagged' ? 'text-red-500 bg-red-900/20 animate-pulse' :
-                                            'text-yellow-500 bg-yellow-900/20'
-                                        }`}>
-                                            {t.status}
-                                        </span>
-                                    </td>
-                                    <td className={`p-4 text-right font-bold font-mono ${t.amount > 0 ? 'text-green-500' : t.amount < 0 ? 'text-red-500' : 'text-gray-400'}`}>
-                                        {t.amount === 0 ? '--' : (t.amount > 0 ? '+' : '') + t.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                                    </td>
+                <div className="dashboard-card p-1">
+                    <div className="p-6 border-b border-white/5 flex flex-col md:flex-row gap-4 items-center justify-between">
+                        <div className="relative w-full md:w-96">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/20" size={18} />
+                            <input 
+                                type="text" 
+                                placeholder="Search historical records..." 
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full bg-black/40 border border-white/5 rounded-xl py-3 pl-10 pr-4 text-white text-sm focus:ring-1 focus:ring-electric-blue focus:outline-none transition-all"
+                            />
+                        </div>
+                        
+                        <div className="flex gap-3 w-full md:w-auto">
+                            <select 
+                                value={filterCategory}
+                                onChange={(e) => setFilterCategory(e.target.value)}
+                                className="bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-white text-xs font-bold uppercase tracking-widest focus:ring-1 focus:ring-electric-blue focus:outline-none appearance-none cursor-pointer"
+                            >
+                                 <option value="All">All Entities</option>
+                                 <option value="Gold Assets">Gold Assets</option>
+                                 <option value="Income">Income</option>
+                                 <option value="Banking">Banking</option>
+                                 <option value="Compliance">Compliance</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                            <thead>
+                                <tr className="border-b border-white/5">
+                                    <th className="p-6 text-white/20 font-bold uppercase text-[10px] tracking-[0.3em]">Reference</th>
+                                    <th className="p-6 text-white/20 font-bold uppercase text-[10px] tracking-[0.3em]">Description</th>
+                                    <th className="p-6 text-white/20 font-bold uppercase text-[10px] tracking-[0.3em]">Classification</th>
+                                    <th className="p-6 text-white/20 font-bold uppercase text-[10px] tracking-[0.3em]">State</th>
+                                    <th 
+                                        className="p-6 text-white/20 font-bold uppercase text-[10px] tracking-[0.3em] text-right cursor-pointer hover:text-white transition-colors"
+                                        onClick={handleSortAmount}
+                                    >
+                                        <div className="flex items-center justify-end gap-2">
+                                            {sortDirection === 'asc' && <ChevronUp size={14} className="text-electric-blue" />}
+                                            {sortDirection === 'desc' && <ChevronDown size={14} className="text-electric-blue" />}
+                                            {sortDirection === null && <ArrowUpDown size={14} />}
+                                            Quantum Value
+                                        </div>
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="divide-y divide-white/[0.02]">
+                                {filteredTransactions.map(t => (
+                                    <tr key={t.id} className="hover:bg-white/[0.02] transition-colors group">
+                                        <td className="p-6 text-white/20 font-mono text-[10px] tracking-tight">{t.id}</td>
+                                        <td className="p-6 font-bold text-white tracking-tight">{t.description}</td>
+                                        <td className="p-6">
+                                            <span className="bg-white/5 text-white/60 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest border border-white/5">
+                                                {t.category}
+                                            </span>
+                                        </td>
+                                        <td className="p-6">
+                                            <span className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest border ${
+                                                t.status === 'Completed' ? 'text-success-emerald bg-success-emerald/10 border-success-emerald/20' : 
+                                                t.status === 'Flagged' ? 'text-danger-rose bg-danger-rose/10 border-danger-rose/20 animate-pulse' :
+                                                'text-warning-amber bg-warning-amber/10 border-warning-amber/20'
+                                            }`}>
+                                                {t.status}
+                                            </span>
+                                        </td>
+                                        <td className={`p-6 text-right font-bold font-mono text-base ${t.amount > 0 ? 'text-success-emerald' : t.amount < 0 ? 'text-danger-rose' : 'text-white/20'}`}>
+                                            {t.amount === 0 ? '--' : (t.amount > 0 ? '+' : '') + t.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    {filteredTransactions.length === 0 && (
+                        <div className="p-20 text-center">
+                            <p className="text-white/20 font-mono text-xs uppercase tracking-widest">No matching telemetry records found</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </AnimatedSection>
