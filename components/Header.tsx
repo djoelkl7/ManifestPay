@@ -56,11 +56,11 @@ const Header: React.FC = () => {
   }, [profileRef]);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Our Thesis', href: '/thesis' },
-    { name: 'Expert Advisory', href: '/dashboard/advisory' },
-    { name: 'Investment Plans', href: '/investment-plans' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Core', href: '/digital-banking' },
+    { name: 'Thesis', href: '/thesis' },
+    { name: 'Assets', href: '/asset-management' },
+    { name: 'Quantum', href: '/dashboard/intelligence' },
+    { name: 'Advisory', href: '/dashboard/advisory' },
   ];
 
   return (

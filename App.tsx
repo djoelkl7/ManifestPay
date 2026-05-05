@@ -16,6 +16,8 @@ import ContactPage from './pages/ContactPage';
 import SignUpPage from './pages/SignUpPage';
 import ThesisPage from './pages/ThesisPage';
 import InstitutionalLoginPage from './pages/InstitutionalLoginPage';
+import AssetManagementPage from './pages/AssetManagementPage';
+import DigitalBankingPage from './pages/DigitalBankingPage';
 import PageTransition from './components/PageTransition';
 
 // Dashboard Components
@@ -122,6 +124,22 @@ const App: React.FC = () => {
               element={
                 <PageTransition>
                   <InstitutionalLoginPage />
+                </PageTransition>
+              } 
+            />
+            <Route 
+              path="/asset-management" 
+              element={
+                <PageTransition>
+                  <AssetManagementPage />
+                </PageTransition>
+              } 
+            />
+            <Route 
+              path="/digital-banking" 
+              element={
+                <PageTransition>
+                  <DigitalBankingPage />
                 </PageTransition>
               } 
             />

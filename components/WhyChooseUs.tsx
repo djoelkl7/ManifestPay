@@ -18,7 +18,7 @@ const WhyChooseUs: React.FC = () => {
       title: 'Quantum Execution',
       description: 'Sub-millisecond order processing with zero-latency liquidity routing.',
       className: 'md:col-span-1 md:row-span-1',
-      bg: 'bg-primary-red/10 border-primary-red/20'
+      bg: 'bg-electric-blue/10 border-electric-blue/20'
     },
     {
       icon: <Globe className="w-6 h-6" />,
@@ -43,7 +43,7 @@ const WhyChooseUs: React.FC = () => {
           <div className="max-w-3xl mb-16">
             <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">
               The Engine of <br />
-              <span className="text-primary-red">Hyper-Growth</span>
+              <span className="text-electric-blue">Hyper-Growth</span>
             </h2>
             <p className="text-white/40 text-lg sm:text-xl font-light leading-relaxed">
               We've re-engineered the financial stack from the ground up. ManifestPay isn't just a bank; it's a high-performance instrument for capital expansion.
@@ -61,7 +61,7 @@ const WhyChooseUs: React.FC = () => {
               transition={{ delay: i * 100 }}
               className={`p-8 rounded-3xl border border-white/5 flex flex-col justify-between group hover:border-white/20 transition-all duration-500 ${feature.className} ${feature.bg}`}
             >
-              <div className="p-3 w-fit rounded-2xl bg-white/5 text-primary-red group-hover:scale-110 group-hover:bg-primary-red group-hover:text-white transition-all duration-500">
+              <div className="p-3 w-fit rounded-2xl bg-white/5 text-electric-blue group-hover:scale-110 group-hover:bg-electric-blue group-hover:text-white transition-all duration-500">
                 {feature.icon}
               </div>
               <div>

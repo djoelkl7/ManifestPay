@@ -75,11 +75,11 @@ const IntelligencePage: React.FC = () => {
                                 <span className="animate-pulse">REC</span>
                             </div>
                             <div className="space-y-2">
-                                <p className="text-electric-blue">>> [23:42:01] SYNTHESIZING POOL_A2_BETA</p>
-                                <p className="text-white/40">>> [23:42:04] NOISE_CANCELING DISCARDED_PACKETS: 4,021</p>
-                                <p className="text-soft-cyan">>> [23:42:08] PATTERN_RECOGNITION: ANOMALY_DETECTED</p>
-                                <p className="text-white/40">>> [23:42:15] CALCULATING RISK_CORRECTION_VECTORS...</p>
-                                <p className="text-green-500">>> [23:42:22] SYNC COMPLETE. ACTION_REQUIRED: TRUE</p>
+                                <p className="text-electric-blue">{" >> "} [23:42:01] SYNTHESIZING POOL_A2_BETA</p>
+                                <p className="text-white/40">{" >> "} [23:42:04] NOISE_CANCELING DISCARDED_PACKETS: 4,021</p>
+                                <p className="text-soft-cyan">{" >> "} [23:42:08] PATTERN_RECOGNITION: ANOMALY_DETECTED</p>
+                                <p className="text-white/40">{" >> "} [23:42:15] CALCULATING RISK_CORRECTION_VECTORS...</p>
+                                <p className="text-green-500">{" >> "} [23:42:22] SYNC COMPLETE. ACTION_REQUIRED: TRUE</p>
                             </div>
                         </div>
                     </div>
