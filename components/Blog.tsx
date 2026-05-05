@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import AnimatedSection from './AnimatedSection';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Define the structure of a blog post
 interface BlogPost {
@@ -54,6 +55,126 @@ const blogPosts: BlogPost[] = [
     },
     slug: '#',
   },
+  {
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800',
+    category: 'Market Insights',
+    date: 'June 30, 2024',
+    title: 'Quantitative Easing and Global Liquidity Cycles',
+    summary: 'A deep dive into how central bank policies affect institutional liquidity and asset pricing in the modern era.',
+    author: {
+      name: 'Sarah Jenkins',
+      avatar: 'https://picsum.photos/100/100?random=11',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1518186239124-118a99bc86e3?auto=format&fit=crop&q=80&w=800',
+    category: 'Technology',
+    date: 'June 25, 2024',
+    title: 'Blockchain Interoperability in Cross-Border Payments',
+    summary: 'Exploring the next frontier of distributed ledger technology and its implications for sovereign settlement systems.',
+    author: {
+      name: 'David Wong',
+      avatar: 'https://picsum.photos/100/100?random=12',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800',
+    category: 'Market Insights',
+    date: 'June 20, 2024',
+    title: 'The Future of Real Estate Tokenization',
+    summary: 'How fractional ownership and smart contracts are transforming illiquid assets into high-velocity capital.',
+    author: {
+      name: 'John Carter',
+      avatar: 'https://picsum.photos/100/100?random=6',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
+    category: 'Technology',
+    date: 'June 15, 2024',
+    title: 'Cybersecurity Protocols for Institutional Wealth',
+    summary: 'Protecting capital in an age of sophisticated digital threats through zero-trust architecture.',
+    author: {
+      name: 'Emily Davis',
+      avatar: 'https://picsum.photos/100/100?random=8',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1526303323884-f742407bd121?auto=format&fit=crop&q=80&w=800',
+    category: 'Retirement',
+    date: 'June 10, 2024',
+    title: 'Inflation-Adjusted Income Streams for Life',
+    summary: 'Strategies for maintaining purchasing power through multi-decade retirement cycles.',
+    author: {
+      name: 'Michael Chen',
+      avatar: 'https://picsum.photos/100/100?random=3',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&q=80&w=800',
+    category: 'Market Insights',
+    date: 'June 5, 2024',
+    title: 'Commodity Supercycles: The New Energy Paradigm',
+    summary: 'Analyzing the long-term impact of the energy transition on global commodity markets and trade flows.',
+    author: {
+      name: 'Sarah Jenkins',
+      avatar: 'https://picsum.photos/100/100?random=11',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800',
+    category: 'Technology',
+    date: 'June 1, 2024',
+    title: 'Neural Networks in Algorithmic Trading',
+    summary: 'Harnessing the power of deep learning to identify non-linear alpha signals in high-frequency data.',
+    author: {
+      name: 'David Wong',
+      avatar: 'https://picsum.photos/100/100?random=12',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1444653300302-799d5a73047d?auto=format&fit=crop&q=80&w=800',
+    category: 'Retirement',
+    date: 'May 25, 2024',
+    title: 'Legacy Planning for the Next Generation',
+    summary: 'Structuring intergenerational wealth transfer through intelligent trust systems and tax-efficient vehicles.',
+    author: {
+      name: 'John Carter',
+      avatar: 'https://picsum.photos/100/100?random=6',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&q=80&w=800',
+    category: 'Market Insights',
+    date: 'May 20, 2024',
+    title: 'Emerging Market Bonds: Risk vs Return',
+    summary: 'A tactical analysis of high-yield debt in developing economies amidst a strong dollar environment.',
+    author: {
+      name: 'Emily Davis',
+      avatar: 'https://picsum.photos/100/100?random=8',
+    },
+    slug: '#',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&q=80&w=800',
+    category: 'Technology',
+    date: 'May 15, 2024',
+    title: 'The Digital Euro: Monetary Sovereignty Reborn',
+    summary: 'What Central Bank Digital Currencies (CBDCs) mean for the future of the global reserve system.',
+    author: {
+      name: 'Michael Chen',
+      avatar: 'https://picsum.photos/100/100?random=3',
+    },
+    slug: '#',
+  },
 ];
 
 const BlogCard: React.FC<{ post: BlogPost }> = ({ post }) => (
@@ -88,11 +209,30 @@ const BlogCard: React.FC<{ post: BlogPost }> = ({ post }) => (
 
 const Blog: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6;
+
   const categories = ['All', 'Market Insights', 'Technology', 'Retirement'];
 
   const filteredPosts = selectedCategory === 'All' 
     ? blogPosts 
     : blogPosts.filter(post => post.category === selectedCategory);
+
+  // Pagination logic
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: document.getElementById('blog')?.offsetTop, behavior: 'smooth' });
+  };
+
+  const handleCategoryChange = (cat: string) => {
+    setSelectedCategory(cat);
+    setCurrentPage(1);
+  };
 
   return (
     <section id="blog" className="py-24 md:py-32 bg-black overflow-hidden relative">
@@ -110,7 +250,7 @@ const Blog: React.FC = () => {
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => handleCategoryChange(cat)}
                   className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
                     selectedCategory === cat 
                       ? 'bg-electric-blue border-electric-blue text-white shadow-lg shadow-electric-blue/20' 
@@ -125,12 +265,53 @@ const Blog: React.FC = () => {
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredPosts.map((post, index) => (
-            <AnimatedSection key={selectedCategory + index} delay={100 * index}>
+          {currentPosts.map((post, index) => (
+            <AnimatedSection key={selectedCategory + currentPage + index} delay={100 * index}>
               <BlogCard post={post} />
             </AnimatedSection>
           ))}
         </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="mt-20 flex justify-center items-center gap-4">
+            <button
+              onClick={() => paginate(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className={`p-3 rounded-full border border-white/10 transition-all duration-300 ${
+                currentPage === 1 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/5 hover:border-white/30 text-white'
+              }`}
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+                <button
+                  key={number}
+                  onClick={() => paginate(number)}
+                  className={`w-10 h-10 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
+                    currentPage === number
+                      ? 'bg-electric-blue border-electric-blue text-white'
+                      : 'bg-transparent border-white/10 text-white/40 hover:text-white hover:border-white/30'
+                  }`}
+                >
+                  {number}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className={`p-3 rounded-full border border-white/10 transition-all duration-300 ${
+                currentPage === totalPages ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/5 hover:border-white/30 text-white'
+              }`}
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
