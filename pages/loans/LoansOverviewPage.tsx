@@ -14,17 +14,17 @@ const LoanCard: React.FC<{
     status: 'Approved' | 'Rejected' | 'Under Review' | 'Active';
 }> = ({ type, balance, total, nextPayment, date, progress, id, status }) => {
     const statusColors = {
-        'Approved': 'bg-green-500/10 text-green-400 border border-green-500/20',
+        'Approved': 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20',
         'Active': 'bg-electric-blue/10 text-electric-blue border border-electric-blue/20',
-        'Rejected': 'bg-red-500/10 text-red-500 border border-red-500/20',
-        'Under Review': 'bg-soft-cyan/10 text-soft-cyan border border-soft-cyan/20',
+        'Rejected': 'bg-rose-500/10 text-rose-500 border border-rose-500/20',
+        'Under Review': 'bg-amber-500/10 text-amber-500 border border-amber-500/20',
     };
 
     const borderColors = {
-        'Approved': 'border-green-500',
+        'Approved': 'border-emerald-500',
         'Active': 'border-electric-blue',
-        'Rejected': 'border-red-500',
-        'Under Review': 'border-soft-cyan',
+        'Rejected': 'border-rose-500',
+        'Under Review': 'border-amber-500',
     };
 
     return (
@@ -73,16 +73,16 @@ const LoanCard: React.FC<{
             )}
             
             {status === 'Under Review' && (
-                <div className="mt-4 p-3 bg-soft-cyan/5 dark:bg-soft-cyan/10 rounded-lg border border-soft-cyan/10">
-                    <p className="text-xs text-soft-cyan">
+                <div className="mt-4 p-3 bg-amber-500/5 dark:bg-amber-500/10 rounded-lg border border-amber-500/10">
+                    <p className="text-xs text-amber-500">
                         Your application is currently being processed by our credit team. Expect a decision within 24-48 hours.
                     </p>
                 </div>
             )}
 
             {status === 'Rejected' && (
-                <div className="mt-4 p-3 bg-red-500/5 dark:bg-red-500/10 rounded-lg border border-red-500/10">
-                    <p className="text-xs text-red-400">
+                <div className="mt-4 p-3 bg-rose-500/5 dark:bg-rose-500/10 rounded-lg border border-rose-500/10">
+                    <p className="text-xs text-rose-400">
                         Unfortunately, your application was not approved at this time. You can re-apply in 90 days.
                     </p>
                 </div>
@@ -136,7 +136,7 @@ const LoansOverviewPage: React.FC = () => {
 
                 <section>
                     <h2 className="text-lg font-bold text-light-text dark:text-white mb-4 flex items-center">
-                        <span className="w-2 h-6 bg-soft-cyan rounded-full mr-3"></span>
+                        <span className="w-2 h-6 bg-amber-500 rounded-full mr-3"></span>
                         Recent Applications
                     </h2>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -146,6 +146,13 @@ const LoansOverviewPage: React.FC = () => {
                             balance="$50,000.00" 
                             total="$50,000.00" 
                             status="Under Review"
+                        />
+                        <LoanCard 
+                            id="APP-2024-015"
+                            type="Equipment" 
+                            balance="$12,000.00" 
+                            total="$12,000.00" 
+                            status="Approved"
                         />
                         <LoanCard 
                             id="APP-2024-009"
