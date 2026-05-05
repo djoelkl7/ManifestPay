@@ -20,6 +20,7 @@ const ProfilePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>('profile');
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [subProfiles, setSubProfiles] = useState<SubProfile[]>([
     { id: '1', name: 'Ahmad Dolmat', role: 'Family Member', status: 'Active', username: 'ahmad_d', cardNumber: '**** **** **** 1122' },
     { id: '2', name: 'Siti Dolmat', role: 'Dependent', status: 'Active', username: 'siti_d', cardNumber: '**** **** **** 3344' },
@@ -96,8 +97,24 @@ const ProfilePage: React.FC = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      // Basic size validation (limit to 2MB to ensure it fits in localStorage alongside other data)
+      if (file.size > 2 * 1024 * 1024) {
+        alert('File is too large. Please select an image smaller than 2MB.');
+        return;
+      }
+
+      setIsUploading(true);
       const reader = new FileReader();
-      reader.onloadend = () => updateUser({ avatar: reader.result as string });
+      reader.onloadend = () => {
+        updateUser({ avatar: reader.result as string });
+        setIsUploading(false);
+        setUpdateSuccess(true);
+        setTimeout(() => setUpdateSuccess(false), 3000);
+      };
+      reader.onerror = () => {
+        alert('Failed to read file.');
+        setIsUploading(false);
+      };
       reader.readAsDataURL(file);
     }
   };
@@ -121,7 +138,7 @@ const ProfilePage: React.FC = () => {
             {/* Header */}
             <div className="p-8 border-b border-gray-100 dark:border-gray-800 flex flex-col md:flex-row items-center gap-6">
               <div className="flex flex-col items-center gap-3">
-                <div className="relative group">
+                <div className="relative group overflow-hidden rounded-full">
                   {user.avatar ? (
                     <img src={user.avatar} alt="Profile" className="w-24 h-24 rounded-full object-cover border-4 border-electric-blue shadow-lg shadow-electric-blue/20" />
                   ) : (
@@ -129,7 +146,19 @@ const ProfilePage: React.FC = () => {
                       <svg className="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" /></svg>
                     </div>
                   )}
-                  <button onClick={handleUploadClick} className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Upload new profile picture">
+                  
+                  {isUploading && (
+                    <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center z-10">
+                      <div className="w-8 h-8 border-4 border-electric-blue border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  )}
+
+                  <button 
+                    onClick={handleUploadClick} 
+                    disabled={isUploading}
+                    className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:cursor-not-allowed" 
+                    aria-label="Upload new profile picture"
+                  >
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                   </button>
                   <input type="file" ref={fileInputRef} onChange={handleFileChange} className="hidden" accept="image/*" />
