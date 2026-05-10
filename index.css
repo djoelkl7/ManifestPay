@@ -26,8 +26,28 @@
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }
 
+:root {
+  --site-bg: #0A0F1A;
+  --site-text: #FFFFFF;
+  --site-text-muted: rgba(255, 255, 255, 0.4);
+  --card-bg: rgba(21, 28, 42, 0.4);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --header-bg: rgba(0, 0, 0, 0.4);
+}
+
+:root:not(.dark) {
+  --site-bg: #F8FAFC;
+  --site-text: #0F172A;
+  --site-text-muted: #64748B;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.8);
+}
+
 body {
-  @apply bg-primary-dark text-white antialiased font-sans;
+  background-color: var(--site-bg);
+  color: var(--site-text);
+  @apply antialiased font-sans transition-colors duration-500;
   background-image: 
     radial-gradient(at 0% 0%, rgba(255, 102, 0, 0.04) 0, transparent 50%),
     radial-gradient(at 100% 0%, rgba(0, 71, 171, 0.04) 0, transparent 50%);
@@ -35,10 +55,13 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   @apply font-display font-semibold tracking-tight;
+  color: var(--site-text);
 }
 
 .dashboard-card {
-  @apply bg-primary-gray/40 border border-white/5 transition-all duration-500 backdrop-blur-xl rounded-2xl overflow-hidden;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  @apply transition-all duration-500 backdrop-blur-xl rounded-2xl overflow-hidden;
 }
 
 .dashboard-card:hover {
@@ -46,11 +69,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  @apply bg-electric-blue text-white font-bold py-4 px-10 rounded-full hover:bg-[#E3532A] transition-all duration-300 transform shadow-xl shadow-electric-blue/10 inline-flex items-center justify-center uppercase tracking-widest text-[10px];
+  @apply bg-electric-blue text-white font-bold py-4 px-10 rounded-full hover:brightness-110 active:scale-95 transition-all duration-300 transform shadow-xl shadow-electric-blue/10 inline-flex items-center justify-center uppercase tracking-widest text-[10px];
 }
 
 .btn-secondary {
-  @apply bg-transparent text-white border border-white/20 font-bold py-4 px-10 rounded-full hover:bg-white/5 transition-all duration-300 inline-flex items-center justify-center uppercase tracking-widest text-[10px];
+  border: 1px solid var(--card-border);
+  color: var(--site-text);
+  @apply bg-transparent font-bold py-4 px-10 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 inline-flex items-center justify-center uppercase tracking-widest text-[10px];
 }
 
 /* Custom Scrollbar */
@@ -58,10 +83,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-primary-dark;
+  background-color: var(--site-bg);
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/5 rounded-full hover:bg-electric-blue transition-colors;
+  background-color: var(--card-border);
+  @apply rounded-full hover:bg-electric-blue transition-colors;
 }
 
 .glass-morphism {

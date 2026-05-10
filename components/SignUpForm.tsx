@@ -191,9 +191,14 @@ const SignUpForm: React.FC = () => {
         <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-primary-red text-white font-bold px-8 py-3 rounded-lg text-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-bg-secondary dark:focus:ring-offset-primary-gray focus:ring-red-500 transition duration-300 transform hover:scale-105 disabled:bg-gray-500 disabled:cursor-not-allowed"
+            className="w-full bg-primary-red text-white font-bold px-8 py-3 rounded-lg text-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-bg-secondary dark:focus:ring-offset-primary-gray focus:ring-red-500 transition duration-300 transform hover:scale-105 disabled:bg-gray-500 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
-            {isSubmitting ? 'Signing Up...' : 'Sign Up Now'}
+            {isSubmitting ? (
+                <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <span>Processing...</span>
+                </>
+            ) : 'Sign Up Now'}
         </button>
       </div>
     </form>

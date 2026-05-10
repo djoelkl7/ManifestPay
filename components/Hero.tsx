@@ -7,13 +7,14 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home"
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-black"
+      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden transition-colors duration-500"
+      style={{ backgroundColor: 'var(--site-bg)' }}
     >
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-electric-blue/10 blur-[120px] rounded-full"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-electric-blue/5 blur-[120px] rounded-full"></div>
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-150"></div>
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-150 pointer-events-none"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -24,19 +25,19 @@ const Hero: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full mb-8 backdrop-blur-sm" style={{ borderColor: 'var(--card-border)', backgroundColor: 'var(--card-bg)' }}>
               <span className="w-2 h-2 rounded-full bg-electric-blue animate-pulse"></span>
-              <span className="text-xs font-medium text-white/60 uppercase tracking-widest">Next-Gen Banking is Live</span>
-              <ChevronRight size={14} className="text-white/40" />
+              <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--site-text-muted)' }}>Next-Gen Banking is Live</span>
+              <ChevronRight size={14} style={{ color: 'var(--site-text-muted)', opacity: 0.5 }} />
             </div>
             
-            <h1 className="text-6xl sm:text-8xl lg:text-9xl font-display font-bold leading-[0.85] mb-10 tracking-tighter">
+            <h1 className="text-6xl sm:text-8xl lg:text-9xl font-display font-bold leading-[0.85] mb-10 tracking-tighter" style={{ color: 'var(--site-text)' }}>
               Sovereign <br />
-              <span className="text-white/20">Capital </span>
+              <span style={{ color: 'var(--site-text)', opacity: 0.2 }}>Capital </span>
               Systems
             </h1>
             
-            <p className="text-xl text-white/40 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+            <p className="text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-light" style={{ color: 'var(--site-text-muted)' }}>
               The new standard for institutional wealth management. <br className="hidden md:block" />
               High-velocity infrastructure for the next generation of global capital.
             </p>

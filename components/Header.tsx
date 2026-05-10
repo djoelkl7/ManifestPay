@@ -64,18 +64,30 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className="bg-black/40 backdrop-blur-xl sticky top-0 z-50 border-white/5">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center border-b border-white/5">
+    <header className="sticky top-0 z-50 transition-colors duration-500" style={{ backgroundColor: 'var(--header-bg)', backdropFilter: 'blur(20px)' }}>
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center border-b" style={{ borderColor: 'var(--card-border)' }}>
         <Link to="/" className="text-2xl transition-transform hover:scale-105 duration-300" aria-label="ManifestPay homepage">
           <Logo />
         </Link>
         <nav className="hidden md:flex items-center space-x-10">
           {navLinks.map((link) => (
-            <Link key={link.name} to={link.href} className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 hover:text-white transition-all duration-300">
+            <Link 
+              key={link.name} 
+              to={link.href} 
+              className="text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300"
+              style={{ color: 'var(--site-text-muted)' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = 'var(--site-text)')}
+              onMouseOut={(e) => (e.currentTarget.style.color = 'var(--site-text-muted)')}
+            >
               {link.name}
             </Link>
           ))}
-           <button onClick={toggleTheme} className="p-2 rounded-full text-light-text-secondary dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-primary-gray transition-colors duration-300" aria-label="Toggle theme">
+           <button 
+            onClick={toggleTheme} 
+            className="p-2 rounded-full transition-colors duration-300" 
+            style={{ color: 'var(--site-text-muted)', backgroundColor: 'var(--card-border)' }}
+            aria-label="Toggle theme"
+          >
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
           

@@ -21,13 +21,13 @@ const ServiceCard: React.FC<{
   >
     <div className="absolute top-0 right-0 w-48 h-48 bg-electric-blue/5 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-electric-blue/10 transition-colors duration-700"></div>
     
-    <div className="mb-10 w-16 h-16 rounded-2xl bg-black flex items-center justify-center text-electric-blue group-hover:scale-110 group-hover:-rotate-3 transition-all duration-700 border border-white/5 shadow-2xl relative z-10">
+    <div className="mb-10 w-16 h-16 rounded-2xl flex items-center justify-center text-electric-blue group-hover:scale-110 group-hover:-rotate-3 transition-all duration-700 border shadow-2xl relative z-10" style={{ backgroundColor: 'var(--site-bg)', borderColor: 'var(--card-border)' }}>
       {icon}
     </div>
     
     <div className="relative z-10 flex-grow">
-      <h3 className="text-3xl font-bold text-white mb-5 tracking-tight group-hover:text-electric-blue transition-colors">{title}</h3>
-      <p className="text-white/40 leading-relaxed font-light mb-10 group-hover:text-white/60 transition-colors text-lg">{description}</p>
+      <h3 className="text-3xl font-bold mb-5 tracking-tight group-hover:text-electric-blue transition-colors" style={{ color: 'var(--site-text)' }}>{title}</h3>
+      <p className="leading-relaxed font-light mb-10 group-hover:opacity-80 transition-opacity text-lg" style={{ color: 'var(--site-text-muted)' }}>{description}</p>
     </div>
     
     {link && (
@@ -70,14 +70,14 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section id="services" className="py-24 bg-black relative">
+    <section id="services" className="py-24 relative transition-colors duration-500" style={{ backgroundColor: 'var(--site-bg)' }}>
       <div className="container mx-auto px-4">
         <AnimatedSection>
           <div className="text-center mb-20">
             <h2 className="text-sm font-bold uppercase tracking-[0.4em] text-electric-blue mb-4">Ecosystem Services</h2>
-            <h3 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
+            <h3 className="text-4xl md:text-5xl font-display font-bold tracking-tight" style={{ color: 'var(--site-text)' }}>
               Sophisticated Wealth <br />
-              <span className="text-white/20">Instruments</span>
+              <span style={{ color: 'var(--site-text)', opacity: 0.2 }}>Instruments</span>
             </h3>
           </div>
         </AnimatedSection>

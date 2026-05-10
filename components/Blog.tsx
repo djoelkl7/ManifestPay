@@ -3,6 +3,12 @@ import React, { useState } from 'react';
 import AnimatedSection from './AnimatedSection';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+interface Author {
+  name: string;
+  avatar: string;
+  bio: string;
+}
+
 // Define the structure of a blog post
 interface BlogPost {
   image: string;
@@ -10,14 +16,11 @@ interface BlogPost {
   date: string;
   title: string;
   summary: string;
-  author: {
-    name: string;
-    avatar: string;
-  };
+  author: Author;
   slug: string;
 }
 
-// Dummy data for blog posts
+// Dummy data for blog posts with author bios
 const blogPosts: BlogPost[] = [
   {
     image: 'https://images.unsplash.com/photo-1611974717482-482bc6ee3011?auto=format&fit=crop&q=80&w=800',
@@ -28,6 +31,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'John Carter',
       avatar: 'https://picsum.photos/100/100?random=6',
+      bio: 'Senior Market Strategist with over 15 years of experience in global equity research and portfolio management.',
     },
     slug: '#',
   },
@@ -40,6 +44,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'Emily Davis',
       avatar: 'https://picsum.photos/100/100?random=8',
+      bio: 'FinTech innovator specializing in machine learning applications for retail banking and wealth management.',
     },
     slug: '#',
   },
@@ -52,6 +57,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'Michael Chen',
       avatar: 'https://picsum.photos/100/100?random=3',
+      bio: 'Certified Financial Planner focused on long-term retirement planning and tax-efficient wealth preservation.',
     },
     slug: '#',
   },
@@ -64,6 +70,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'Sarah Jenkins',
       avatar: 'https://picsum.photos/100/100?random=11',
+      bio: 'Macroeconomic analyst focusing on monetary policy and its impact on emerging markets and institutional capital flows.',
     },
     slug: '#',
   },
@@ -76,6 +83,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'David Wong',
       avatar: 'https://picsum.photos/100/100?random=12',
+      bio: 'Principal Architect of Manifest Core, with a background in cryptographic engineering and distributed systems.',
     },
     slug: '#',
   },
@@ -88,6 +96,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'John Carter',
       avatar: 'https://picsum.photos/100/100?random=6',
+      bio: 'Senior Market Strategist with over 15 years of experience in global equity research and portfolio management.',
     },
     slug: '#',
   },
@@ -100,6 +109,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'Emily Davis',
       avatar: 'https://picsum.photos/100/100?random=8',
+      bio: 'FinTech innovator specializing in machine learning applications for retail banking and wealth management.',
     },
     slug: '#',
   },
@@ -112,6 +122,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'Michael Chen',
       avatar: 'https://picsum.photos/100/100?random=3',
+      bio: 'Certified Financial Planner focused on long-term retirement planning and tax-efficient wealth preservation.',
     },
     slug: '#',
   },
@@ -124,6 +135,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'Sarah Jenkins',
       avatar: 'https://picsum.photos/100/100?random=11',
+      bio: 'Macroeconomic analyst focusing on monetary policy and its impact on emerging markets and institutional capital flows.',
     },
     slug: '#',
   },
@@ -136,6 +148,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'David Wong',
       avatar: 'https://picsum.photos/100/100?random=12',
+      bio: 'Principal Architect of Manifest Core, with a background in cryptographic engineering and distributed systems.',
     },
     slug: '#',
   },
@@ -148,6 +161,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'John Carter',
       avatar: 'https://picsum.photos/100/100?random=6',
+      bio: 'Senior Market Strategist with over 15 years of experience in global equity research and portfolio management.',
     },
     slug: '#',
   },
@@ -160,6 +174,7 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'Emily Davis',
       avatar: 'https://picsum.photos/100/100?random=8',
+      bio: 'FinTech innovator specializing in machine learning applications for retail banking and wealth management.',
     },
     slug: '#',
   },
@@ -172,12 +187,13 @@ const blogPosts: BlogPost[] = [
     author: {
       name: 'Michael Chen',
       avatar: 'https://picsum.photos/100/100?random=3',
+      bio: 'Certified Financial Planner focused on long-term retirement planning and tax-efficient wealth preservation.',
     },
     slug: '#',
   },
 ];
 
-const BlogCard: React.FC<{ post: BlogPost }> = ({ post }) => (
+const BlogCard: React.FC<{ post: BlogPost; onAuthorClick: (author: Author) => void }> = ({ post, onAuthorClick }) => (
     <div className="bg-[#0B0E14]/40 border border-white/5 transition-all duration-500 backdrop-blur-xl rounded-[2rem] overflow-hidden h-full flex flex-col group hover:border-electric-blue/30 hover:-translate-y-2">
         <a href={post.slug} className="block relative h-56 overflow-hidden" aria-label={`Read more about ${post.title}`}>
             <img src={post.image} alt="" className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
@@ -194,14 +210,19 @@ const BlogCard: React.FC<{ post: BlogPost }> = ({ post }) => (
             <p className="text-white/40 font-light text-sm flex-grow mb-8 leading-relaxed">{post.summary}</p>
             
             <div className="flex items-center mt-auto pt-6 border-t border-white/5">
-                <div className="relative">
-                  <img className="w-11 h-11 rounded-full mr-4 object-cover ring-1 ring-white/10" src={post.author.avatar} alt={post.author.name} />
-                  <div className="absolute -bottom-1 -right-0 w-3 h-3 bg-success-emerald rounded-full border-2 border-primary-dark"></div>
-                </div>
-                <div>
-                    <p className="font-bold text-white text-sm uppercase tracking-wider">{post.author.name}</p>
-                    <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] mt-0.5">{post.date}</p>
-                </div>
+                <button 
+                  onClick={() => onAuthorClick(post.author)}
+                  className="flex items-center group/author text-left focus:outline-none"
+                >
+                    <div className="relative">
+                      <img className="w-11 h-11 rounded-full mr-4 object-cover ring-1 ring-white/10 group-hover/author:ring-electric-blue/50 transition-all" src={post.author.avatar} alt={post.author.name} />
+                      <div className="absolute -bottom-1 -right-0 w-3 h-3 bg-success-emerald rounded-full border-2 border-primary-dark"></div>
+                    </div>
+                    <div>
+                        <p className="font-bold text-white text-sm uppercase tracking-wider group-hover/author:text-electric-blue transition-colors">{post.author.name}</p>
+                        <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] mt-0.5">{post.date}</p>
+                    </div>
+                </button>
             </div>
         </div>
     </div>
@@ -209,6 +230,7 @@ const BlogCard: React.FC<{ post: BlogPost }> = ({ post }) => (
 
 const Blog: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedAuthor, setSelectedAuthor] = useState<Author | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
 
@@ -226,13 +248,17 @@ const Blog: React.FC = () => {
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: document.getElementById('blog')?.offsetTop, behavior: 'smooth' });
+    window.scrollTo({ top: (document.getElementById('blog')?.offsetTop || 0), behavior: 'smooth' });
   };
 
   const handleCategoryChange = (cat: string) => {
     setSelectedCategory(cat);
     setCurrentPage(1);
   };
+
+  const authorPosts = selectedAuthor 
+    ? blogPosts.filter(post => post.author.name === selectedAuthor.name)
+    : [];
 
   return (
     <section id="blog" className="py-24 md:py-32 bg-black overflow-hidden relative">
@@ -267,10 +293,53 @@ const Blog: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {currentPosts.map((post, index) => (
             <AnimatedSection key={selectedCategory + currentPage + index} delay={100 * index}>
-              <BlogCard post={post} />
+              <BlogCard post={post} onAuthorClick={setSelectedAuthor} />
             </AnimatedSection>
           ))}
         </div>
+
+        {/* Author Modal */}
+        {selectedAuthor && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-xl z-[100] flex items-center justify-center p-6">
+            <AnimatedSection>
+              <div className="bg-[#0B0E14] border border-white/10 rounded-[3rem] w-full max-w-4xl max-h-[85vh] overflow-y-auto relative p-10 md:p-16 custom-scrollbar">
+                <button 
+                  onClick={() => setSelectedAuthor(null)}
+                  className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors"
+                >
+                    <span className="text-xs font-bold uppercase tracking-widest">Close</span>
+                </button>
+
+                <div className="flex flex-col md:flex-row gap-10 items-start mb-16">
+                    <img className="w-32 h-32 rounded-3xl object-cover ring-2 ring-electric-blue/20" src={selectedAuthor.avatar} alt={selectedAuthor.name} />
+                    <div className="max-w-2xl">
+                        <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-6 tracking-tight">{selectedAuthor.name}</h3>
+                        <p className="text-white/40 text-lg font-light leading-relaxed mb-6">{selectedAuthor.bio}</p>
+                        <div className="flex gap-4">
+                           <div className="px-4 py-2 bg-white/5 rounded-xl border border-white/5">
+                              <span className="block text-[10px] text-white/20 uppercase tracking-widest mb-1">Publications</span>
+                              <span className="text-xl font-bold text-white">{authorPosts.length}</span>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                   <h4 className="text-white/20 text-[10px] uppercase tracking-[0.4em] font-bold mb-10">Author Intel / Publications</h4>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      {authorPosts.map((post, i) => (
+                        <div key={i} className="group cursor-pointer bg-white/5 p-6 rounded-2xl border border-white/5 hover:border-electric-blue/30 transition-all duration-500">
+                           <p className="text-[10px] text-electric-blue font-bold uppercase tracking-widest mb-3">{post.category} • {post.date}</p>
+                           <h5 className="text-xl font-bold text-white mb-3 group-hover:text-electric-blue transition-colors">{post.title}</h5>
+                           <p className="text-sm text-white/40 font-light line-clamp-2">{post.summary}</p>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        )}
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
